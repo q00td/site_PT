@@ -8,12 +8,12 @@
     <div id="content">
         <div id="Events" class="col-md-12">
             <div class="col-md-4">
-            <a href="" id="Events">Vos Evenements</a>
+                <a href="" id="Events"><h4 class="text-blanc">Vos Evenements</h4></a>
             </div>
             <div class="col-md-4">
-            <a href="" id="Events">En créer un</a>
+                <a href="" id="Events"><h4 class="text-blanc">En créer un</h4></a>
             </div>
-            <div class="col-md-4 pull-right">
+            <div class="col-md-4">
             <form action="" >
                 <input name="text" type="text" value="Chercher un évenement">
                 <input type="submit" value="Valider" />
@@ -41,9 +41,14 @@
                 <div class="col-md-4">
                 <h4>{{ evenement.date_evenement }}</h4>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-4">
                     <h4>{{ evenement.lieu_evenement }}</h4>
                 </div>
+                    <div class="col-md-4">
+                        <form action="" >
+                            <input type="submit" value="Participer!" />
+                        </form>
+                    </div>
                 <div class="col-md-12">
                 <h6>{{ evenement.description_evenement }}</h6>
                 </div>

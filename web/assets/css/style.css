@@ -5,12 +5,31 @@
  */
 
 body {
-    padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+     /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 #Events{
 background: #949494;
 
 }
+.text-blanc{
+    color:#FFFFFF;
+}
+
+#News{
+    height: 150px;
+    display: block;
+    padding: 4px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
+
 #bg{
     background-image:url(Belfort.jpg);
 }
