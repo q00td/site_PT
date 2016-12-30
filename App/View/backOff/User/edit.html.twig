@@ -1,0 +1,60 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+	<form method="post" action="{{ path('user.validFormEditUser') }}">
+		<div class="row">
+
+
+
+			{% if errors is defined %}
+			     <div data-alert class="alert-box alert round">
+			     
+			     	{% for error in errors %}
+						<li>{{ error.getPropertyPath }} : {{ error.getMessage }}</li>
+					{% endfor %}
+            	
+            	<a href="#" class="close">&times;</a>
+        		</div>
+			{% endif %}
+
+			<fieldset>
+
+				<legend>Modifier un produit  (avec twig)</legend>
+				<input name="id"  type="hidden" value="{{donnees.id}}" />
+				<label>login :
+					<input name="login"  type="text"  size="18" value="{{donnees.login}}" />
+					{% if erreurs.login is defined %}
+						<small class="error">{{erreurs.login}}</small>
+					{% endif %}
+				</label>
+				<label>password :
+					<input name="password"  type="text"  size="18" value="{{donnees.password}}" />
+                    {% if erreurs.login is defined %}
+						<small class="error">{{erreurs.login}}</small>
+                    {% endif %}
+				</label>
+				<label>email :
+					<input name="email"  type="text"  size="18" value="{{donnees.email}}" />
+                    {% if erreurs.login is defined %}
+						<small class="error">{{erreurs.login}}</small>
+                    {% endif %}
+				</label>
+				<label>valide :
+					<input name="valide"  type="text"  size="18" value="{{donnees.valide}}" />
+                    {% if erreurs.login is defined %}
+						<small class="error">{{erreurs.login}}</small>
+                    {% endif %}
+				</label>
+				<label>droit :
+					<input name="droit"  type="text"  size="18" value="{{donnees.droit}}" />
+                    {% if erreurs.login is defined %}
+						<small class="error">{{erreurs.login}}</small>
+                    {% endif %}
+				</label>
+
+				<input type="hidden" id="_method" name="_method" value="put" />
+
+				<input type="submit" name="modifierProduit" value="Modifier" />
+			</fieldset>
+		</div>
+	</form>
+{% endblock %}

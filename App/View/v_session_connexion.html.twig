@@ -1,0 +1,40 @@
+
+{% extends "layout.html.twig" %}
+{% block contenu %}
+<body id="bg">
+<div class="container-fluid-full">
+    <div class="row-fluid">
+
+        <div class="row-fluid">
+            <div class="login-box">
+                <div class="icons">
+                    <a href="App/View/index.html.twig"><i class="halflings-icon home"></i></a>
+                    <a href="#"><i class="halflings-icon cog"></i></a>
+                </div>
+                <h2>Se connecter</h2>
+                <form class="form-horizontal" action="{{ path('user.validFormlogin') }}" method="post">
+                    <fieldset>
+
+                        <div class="input-prepend" title="Username">
+                            <input class="input-large span10" name="login" id="username" type="text" placeholder="type username"/>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="input-prepend" title="Password">
+                            <input class="input-large span10" name="password" id="password" type="password" placeholder="type password"/>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="button-login">
+                            <button type="submit" class="btn btn-primary">Entrer</button>
+                        </div>
+                        <div class="clearfix"></div>
+                </form>
+                <hr>
+
+            </div><!--/span-->
+        </div><!--/row-->
+
+
+    </div><!--/.fluid-container-->
+{% endblock %}

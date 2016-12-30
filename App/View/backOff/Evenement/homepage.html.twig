@@ -1,0 +1,54 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+    <body id="bg">
+    <!-- start: Content -->
+
+    <div class="row-fluid">
+
+    <div id="content" class="span12">
+
+
+        {#<div id="sidenavbar" class="col-md-3">#}
+            {#<div class="nav-collapse sidebar-nav">#}
+                {#<ul class="nav nav-tabs nav-stacked main-menu">#}
+                    {#<li><a href="{{ path('produit.show')}}"><span class="hidden-tablet"> Acceuil</span></a></li>#}
+                    {#<li><a href="index.html.twig">Message</a></li>#}
+                    {#<li><a href="{{ path('Evenement.show')}}">Evenements</a></li>#}
+                    {#<li><a href="index.html.twig">Prof</a></li>#}
+
+                {#</ul>#}
+            {#</div>#}
+
+        {#</div>#}
+        {% for evenement in data if data is not empty %}
+        <div id="Events" class="col-md-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                <div class="caption">
+                <div class="col-md-4">
+                <h4>{{ evenement.date_evenement }}</h4>
+                </div>
+                <div class="col-md-8">
+                    <h4>{{ evenement.lieu_evenement }}</h4>
+                </div>
+                <div class="col-md-12">
+                <h6>{{ evenement.description_evenement }}</h6>
+                </div>
+
+
+
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+
+
+    </div>
+    </div>
+
+
+    </body>
+
+{% endblock %}
+
