@@ -5,9 +5,23 @@
 
     <div class="row-fluid">
 
-    <div id="content" class="span12">
+    <div id="content">
+        <div id="Events" class="col-md-12">
+            <div class="col-md-4">
+            <a href="" id="Events">Vos Evenements</a>
+            </div>
+            <div class="col-md-4">
+            <a href="" id="Events">En créer un</a>
+            </div>
+            <div class="col-md-4 pull-right">
+            <form action="" >
+                <input name="text" type="text" value="Chercher un évenement">
+                <input type="submit" value="Valider" />
+            </form>
+            </div>
 
 
+        </div>
         {#<div id="sidenavbar" class="col-md-3">#}
             {#<div class="nav-collapse sidebar-nav">#}
                 {#<ul class="nav nav-tabs nav-stacked main-menu">#}
@@ -21,7 +35,7 @@
 
         {#</div>#}
         {% for evenement in data if data is not empty %}
-        <div id="Events" class="col-md-4 col-lg-4 col-md-4">
+        <div class="col-md-4 col-lg-4 col-md-4">
             <div class="thumbnail">
                 <div class="caption">
                 <div class="col-md-4">

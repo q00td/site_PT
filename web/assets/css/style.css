@@ -8,7 +8,7 @@ body {
     padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 #Events{
-
+background: #949494;
 
 }
 #bg{
@@ -21,9 +21,7 @@ body {
 h5{
     color:#ff0000;
 }
-red{
-    color:#761c19;
-}
+
 .slide-image {
     width: 100%;
 }
