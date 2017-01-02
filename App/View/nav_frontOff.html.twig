@@ -1,79 +1,43 @@
-<body>
-<div id="hautdepage">
-
-</div>
-<!-- start: Header -->
-
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-            </a>
-
-            <img class="brand" src="img/logo.png">
-            <a class="brand" href="index.html.twig"><span>StudLion</span></a>
-
-            <!-- start: Header Menu -->
-            {% if   app.session.get('logged') is defined and  app.session.get('logged') == 1 %}
-            <div class="nav-no-collapse header-nav">
-                <ul class="nav pull-right">
-                    <!-- start: User Dropdown -->
-                    <li class="dropdown">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="halflings-icon white user"></i> {{ app.session.get('login') }}
-                            <span class="caret"></span>
-                        </a>
-
-
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-menu-title">
-                                <span>Account Settings</span>
-                            </li>
-                            <li><a href="{{ path('user.logout')  }}">Se déconnecter</a></li>
-                        </ul>
-                    </li>
-                    <!-- end: User Dropdown -->
-                    {% else %}
-                        <li><a href="{{ path('user.login')  }}">Se connecter</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-            <!-- end: Header Menu -->
-
+            </button>
+            <a class="navbar-brand" href="#">Studlion</a>
         </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ path('produit.show')}}"><span class="hidden-tablet"> Acceuil</span></a></li>
+                <li><a href="{{ path('Evenement.show')}}"><span class="hidden-tablet"> Evenements</span></a></li>
+                {% if   app.session.get('logged') is defined and  app.session.get('logged') == 1 %}
+                    <li><a href="">{{ app.session.get('login') }}</a></li>
+                    <li><a href="{{ path('user.logout')  }}">Se déconnecter</a></li>
+                {% else %}
+                    <li><a href="{{ path('user.login')  }}">Se connecter</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
+    <!-- /.container -->
 </nav>
 <!-- start: Header -->
+{#<div class="container">#}
 
-<div class="container-fluid-full">
-    <div class="row-fluid">
+    {#<div class="row">#}
 
-        <!-- start: Main Menu -->
-        <div id="sidebar-left" class="span2">
-            <div class="nav-collapse sidebar-nav">
-                <ul class="nav nav-tabs nav-stacked main-menu">
-                    <li><a href="index.html.twig"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Accueil</span></a></li>
-                    <li><a href="index.html.twig"><i class="icon-envelope"></i><span class="hidden-tablet"> Messages</span></a></li>
-                    <li><a href="index.html.twig"><i class="icon-tasks"></i><span class="hidden-tablet"> Annonces</span></a></li>
-                    <li><a href="index.html.twig"><i class="icon-eye-open"></i><span class="hidden-tablet">Prof</span></a></li>
-                    <li><a href="index.html.twig"><i class="icon-dashboard"></i><span class="hidden-tablet"> Eleve</span></a></li>
-                    <li><a href="index.html.twig"><i class="icon-eye-open"></i><span class="hidden-tablet">Co-voiturage</span></a></li>
-                    <li><a href="index.html.twig"><i class="icon-dashboard"></i><span class="hidden-tablet"> Help</span></a></li>
-                    <li><a href="index.html.twig"><i class="icon-eye-open"></i><span class="hidden-tablet">Contact</span></a></li>
-                    <li><a href="index.html.twig"><i class="icon-dashboard"></i><span class="hidden-tablet"> Test</span></a></li>
+        {#<div class="col-md-3">#}
+
+<!-- start: Main Menu -->
 
 
-                </ul>
-            </div>
-        </div>
-        <!-- end: Main Menu -->
 
-        <noscript>
-            <div class="alert alert-block span10">
-                <h4 class="alert-heading">Warning!</h4>
-                <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
-            </div>
-        </noscript>
+<!-- end: Main Menu -->
+
