@@ -1,0 +1,70 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+    <body id="bg">
+    <!-- start: Content -->
+
+    <div class="row-fluid">
+
+        <div id="content">
+            <div id="Events" class="col-md-12">
+                <div class="col-md-4">
+                    <a href="" id="Events"><h4 class="text-blanc">Vos Cours</h4></a>
+                </div>
+                <div class="col-md-4">
+                    <a href="" id="Events"><h4 class="text-blanc">En créer un</h4></a>
+                </div>
+                <div class="col-md-4">
+                    <form action="" >
+                        <input name="text" type="text" value="Chercher un Cour">
+                        <input type="submit" value="Valider" />
+                    </form>
+                </div>
+
+
+            </div>
+            {#<div id="sidenavbar" class="col-md-3">#}
+            {#<div class="nav-collapse sidebar-nav">#}
+            {#<ul class="nav nav-tabs nav-stacked main-menu">#}
+            {#<li><a href="{{ path('produit.show')}}"><span class="hidden-tablet"> Acceuil</span></a></li>#}
+            {#<li><a href="index.html.twig">Message</a></li>#}
+            {#<li><a href="{{ path('Evenement.show')}}">Evenements</a></li>#}
+            {#<li><a href="index.html.twig">Prof</a></li>#}
+
+            {#</ul>#}
+            {#</div>#}
+
+            {#</div>#}
+            {% for cours in data if data is not empty %}
+                <div class="col-md-4 col-lg-4 col-md-4">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <div class="col-md-8">
+                                <h4>{{ cours.nom_cours }}</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <form action="" >
+                                    <input type="submit" value="S'inscrire" />
+                                </form>
+                            </div>
+                            <div class="col-md-12">
+                                <h6>{{ cours.description_cours }}</h6>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+
+
+        </div>
+    </div>
+
+
+    </body>
+
+{% endblock %}
+

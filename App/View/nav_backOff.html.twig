@@ -15,6 +15,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="{{ path('produit.show')}}"><span class="hidden-tablet"> Acceuil</span></a></li>
+                <li><a href="{{ path('Cours.show')}}"><span class="hidden-tablet"> Cours</span></a></li>
+
                 <li><a href="{{ path('Evenement.show')}}"><span class="hidden-tablet"> Evenements</span></a></li>
                 {% if   app.session.get('logged') is defined and  app.session.get('logged') == 1 %}
                     <li><a href="">{{ app.session.get('login') }}</a></li>

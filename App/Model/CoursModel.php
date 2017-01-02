@@ -13,8 +13,8 @@ class CoursModel {
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
             ->select('c.id_cours', 'c.nom_cours', 'c.description_cours', 'c.id_user', 'c.id_matiere', 'm.nom_matiere')
-            ->from('cours', 'c')
-            ->innerJoin('c', 'matiere', 'm', 'c.id_matiere=m.id_matiere')
+            ->from('Cours', 'c')
+            ->innerJoin('c', 'Matiere', 'm', 'c.id_matiere=m.id_matiere')
             ->addOrderBy('c.id_matiere', ',c.nom_cours', 'ASC');
         return $queryBuilder->execute()->fetchAll();
     }

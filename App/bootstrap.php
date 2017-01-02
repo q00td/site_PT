@@ -57,6 +57,8 @@ $app->mount("/", new App\Controller\IndexController());
 $app->mount("/acceuil", new App\Controller\ProduitController($app));
 $app->mount("/connexion", new App\Controller\UserController($app));
 $app->mount("/Evenement", new App\Controller\EvenementController($app));
+$app->mount("/Cours", new App\Controller\CoursController($app));
+
 
 
 

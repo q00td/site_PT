@@ -22,11 +22,11 @@
   </head>
   <body>
 
-{% if   app.session.get('id_type_user') is defined and  app.session.get('id_type_user') == 1 %}
+{#{% if   app.session.get('id_type_user') is defined and  app.session.get('id_type_user') == 1 %}#}
   {% include "nav_backOff.html.twig" %}
-{% elseif   app.session.get('id_type_user') is defined and  app.session.get('id_type_user') == 1 %}
-  {% include "nav_frontOff.html.twig" %}
-{% endif %}
+{#{% elseif   app.session.get('id_type_user') is defined and  app.session.get('id_type_user') == 2 %}#}
+  {#{% include "nav_frontOff.html.twig" %}#}
+{#{% endif %}#}
 
 
 {% block contenu %}

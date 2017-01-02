@@ -20,7 +20,7 @@ class CoursController implements ControllerProviderInterface
     public function show(Application $app) {
         $this->CoursModel = new CoursModel($app);
         $Cours = $this->CoursModel->getAllCours();
-        return $app["twig"]->render('backOff/Cours/homepage.html.twig',['data'=>$Cours]);
+        return $app["twig"]->render('backOff/Cours/Cours.html.twig',['data'=>$Cours]);
     }
     public function add(Application $app) {
         if(isset($app["session"])&&$app ["session"]->get("droit")!="DROITadmin"){
