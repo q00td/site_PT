@@ -9,7 +9,9 @@ class IndexController implements ControllerProviderInterface
 {
     public function index(Application $app)
     {
-        return $app["twig"]->render("layout.html.twig");
+        $app['session']->clear();
+        $app['session']->getFlashBag()->add('msg', 'vous êtes déconnecté');
+        return $app["twig"]->render("v_session_connexion.html.twig");
     }
 
     public function connect(Application $app)
