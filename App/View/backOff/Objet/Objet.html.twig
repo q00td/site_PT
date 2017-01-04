@@ -11,7 +11,7 @@
                     <a href="" id="Events"><h4 class="text-blanc">Vos Annonces</h4></a>
                 </div>
                 <div class="col-md-4">
-                    <a href="" id="Events"><h4 class="text-blanc">Ajouter une annonce</h4></a>
+                    <a href="{{ path('Objet.add') }}" id="Events"><h4 class="text-blanc">Ajouter une annonce</h4></a>
                 </div>
                 <div class="col-md-4">
                     <form action="" >
@@ -46,11 +46,12 @@
                                     <input type="submit" value="Voir la personne" />
                                 </form>
                             </div>
-                            <div class="col-md-12">
-                                <h6>{{ objet.description_objet }}</h6>
+                            <div class="col-md-10">
+                                <h6>{{ objet.description_objet }} ( sur {{ objet.lieu_objet }} )</h6>
                             </div>
-
-
+                            <div class="col-md-2">
+                                <h6>{{ objet.prix_objet }}€</h6>
+                            </div>
 
                         </div>
                     </div>

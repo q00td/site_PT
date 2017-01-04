@@ -34,44 +34,43 @@ class ObjetController implements ControllerProviderInterface
 
 
     public function add(Application $app) {
-        if(isset($app["session"])&&$app ["session"]->get("droit")!="DROITadmin"){
+        if(isset($app["session"])&&$app ["session"]->get("user_id")!=1){
             return "Vous n'avez pas les droits";
         }
-        $this->typeObjetModel = new TypeObjetModel($app);
-        $typeObjets = $this->typeObjetModel->getAllTypeObjets();
-        return $app["twig"]->render('backOff/Objet/add.html.twig',['typeObjets'=>$typeObjets,'path'=>BASE_URL]);
+        //$this->typeObjetModel = new TypeObjetModel($app);
+        //$typeObjets = $this->typeObjetModel->getAllTypeObjets();
+        return $app["twig"]->render('backOff/Objet/add.html.twig',['path'=>BASE_URL]);
         return "add Objet";
     }
 
     public function validFormAdd(Application $app, Request $req) {
-        if(isset($app["session"])&&$app ["session"]->get("droit")!="DROITadmin"){
+        if(isset($app["session"])&&$app ["session"]->get("user_id")!=1){
             return "Vous n'avez pas les droits";
         }
         // var_dump($app['request']->attributes);
-        if (isset($_POST['nom']) && isset($_POST['typeObjet_id']) and isset($_POST['nom']) and isset($_POST['photo'])) {
+        if (isset($_POST['nom_objet']) && isset($_POST['description_objet']) and isset($_POST['lieu_objet']) and isset($_POST['prix_objet'])) {
             $donnees = [
-                'nom' => htmlspecialchars($_POST['nom']),                    // echapper les entrées
-                'typeObjet_id' => htmlspecialchars($app['request']->get('typeObjet_id')),
-                'prix' => htmlspecialchars($req->get('prix')),
-                'photo' => $app->escape($req->get('photo')),
-                'stock' => htmlspecialchars($_POST['stock'])    //$req->query->get('photo')
+                'nom_objet' => htmlspecialchars($_POST['nom_objet']),                    // echapper les entrées
+                'description_objet' =>htmlspecialchars($_POST['description_objet']),
+                'lieu_objet' => htmlspecialchars($_POST['lieu_objet']),
+                'prix_objet' => htmlspecialchars($_POST['prix_objet'])  //$req->query->get('photo')
+//$req->query->get('photo')
             ];
-            if(! preg_match("/^[A-Za-z ]{2,}/",$donnees['nom'])) $erreurs['nom']='nom composé de 2 lettres minimum';
-            if(! is_numeric($donnees['typeObjet_id']))$erreurs['typeObjet_id']='veuillez saisir une valeur';
-            if(! is_numeric($donnees['prix']))$erreurs['prix']='saisir un prix valide';
-            if(! is_numeric($donnees['stock']))$erreurs['stock']='saisir une valeur numérique entière';
-            if(! preg_match("/[A-Za-z0-9]{2,}.(jpeg|jpg|png)/",$donnees['photo'])) $erreurs['photo']='nom de fichier incorrect (extension jpeg , jpg ou png)';
+            if(! preg_match("/^[A-Za-z ]{2,}/",$donnees['nom_objet'])) $erreurs['nom_objet']='nom composé de 2 lettres minimum';
+            if(! preg_match("/^[A-Za-z ]{2,}/",$donnees['description_objet'])) $erreurs['description_objet']='description composé de 2 lettres minimum';
+            if(! preg_match("/^[A-Za-z ]{2,}/",$donnees['lieu_objet'])) $erreurs['lieu_objet']='lieu composé de 2 lettres minimum';
+            if(! is_numeric($donnees['prix_objet'])) $erreurs['prix_objet']='prix non valide';
 
             if(! empty($erreurs))
             {
-                $this->typeObjetModel = new TypeObjetModel($app);
-                $typeObjets = $this->typeObjetModel->getAllTypeObjets();
-                return $app["twig"]->render('backOff/Objet/add.html.twig',['donnees'=>$donnees,'erreurs'=>$erreurs,'typeObjets'=>$typeObjets]);
+                var_dump($erreurs);
+                return $app["twig"]->render('backOff/Objet/add.html.twig',['donnees'=>$donnees,'erreurs'=>$erreurs]);
             }
             else
             {
                 $this->ObjetModel = new ObjetModel($app);
-                $this->ObjetModel->insertObjet($donnees);
+                $id=$app['session']->get("user_id");
+                $this->ObjetModel->insertObjet($donnees,$id);
                 return $app->redirect($app["url_generator"]->generate("Objet.index"));
             }
 
@@ -82,7 +81,7 @@ class ObjetController implements ControllerProviderInterface
     }
 
     public function delete(Application $app, $id) {
-        if(isset($app["session"])&&$app ["session"]->get("droit")!="DROITadmin"){
+        if(isset($app["session"])&&$app ["session"]->get("droit")!=1){
             return "Vous n'avez pas les droits";
         }
         $this->typeObjetModel = new TypeObjetModel($app);
@@ -94,7 +93,7 @@ class ObjetController implements ControllerProviderInterface
     }
 
     public function validFormDelete(Application $app, Request $req) {
-        if(isset($app["session"])&&$app ["session"]->get("droit")!="DROITadmin"){
+        if(isset($app["session"])&&$app ["session"]->get("droit")!=1){
             return "Vous n'avez pas les droits";
         }
         $id=$app->escape($req->get('id'));
@@ -109,7 +108,7 @@ class ObjetController implements ControllerProviderInterface
 
 
     public function edit(Application $app, $id) {
-        if(isset($app["session"])&&$app ["session"]->get("droit")!="DROITadmin"){
+        if(isset($app["session"])&&$app ["session"]->get("droit")!=1){
             return "Vous n'avez pas les droits";
         }
         $this->typeObjetModel = new TypeObjetModel($app);
@@ -121,7 +120,7 @@ class ObjetController implements ControllerProviderInterface
     }
 
     public function validFormEdit(Application $app, Request $req) {
-        if(isset($app["session"])&&$app ["session"]->get("droit")!="DROITadmin"){
+        if(isset($app["session"])&&$app ["session"]->get("droit")!=1){
             return "Vous n'avez pas les droits";
         }
         // var_dump($app['request']->attributes);

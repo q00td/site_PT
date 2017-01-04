@@ -22,29 +22,29 @@ class ObjetModel {
 //        return $req->fetchAll();
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
-            ->select('e.id_objet','e.nom_objet','e.description_objet','e.lieu_objet','e.id_user')
+            ->select('e.id_objet','e.nom_objet','e.description_objet','e.lieu_objet','e.id_user','e.prix_objet')
             ->from('Objet', 'e')
             ->addOrderBy('e.nom_objet','ASC');
         return $queryBuilder->execute()->fetchAll();
     }
 
-    public function insertObjet($donnees) {
+    public function insertObjet($donnees,$id) {
         $queryBuilder = new QueryBuilder($this->db);
-        $queryBuilder->insert('produits')
+        $queryBuilder->insert('Objet')
             ->values([
-                'nom' => '?',
-                'typeProduit_id' => '?',
-                'prix' => '?',
-                'photo' => '?',
-                'dispo' => '?',
-                'stock' => '?'
+                'nom_objet' => '?',
+                'description_objet' => '?',
+                'lieu_objet' => '?',
+                'prix_objet' => '?',
+                'id_user' => '?'
             ])
-            ->setParameter(0, $donnees['nom'])
-            ->setParameter(1, $donnees['typeProduit_id'])
-            ->setParameter(2, $donnees['prix'])
-            ->setParameter(3, $donnees['photo'])
-            ->setParameter(4, 1)
-            ->setParameter(5, $donnees['stock'])
+            ->setParameter(0, $donnees['nom_objet'])
+            ->setParameter(1, $donnees['description_objet'])
+            ->setParameter(2, $donnees['lieu_objet'])
+            ->setParameter(3, $donnees['prix_objet'])
+
+            ->setParameter(4, $id)
+
         ;
         return $queryBuilder->execute();
     }

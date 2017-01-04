@@ -34,7 +34,7 @@ class UserController implements ControllerProviderInterface {
 			$app['session']->set('id_type_user', $data['id_type_user']);  //dans twig {{ app.session.get('droit') }}
 			$app['session']->set('login', $data['login']);
 			$app['session']->set('logged', 1);
-			$app['session']->set('user_id',$data['id']);
+			$app['session']->set('user_id',$data['id_user']);
 			return $app->redirect($app["url_generator"]->generate("produit.index"));
 		}
 		else
