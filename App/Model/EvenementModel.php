@@ -10,16 +10,12 @@ class EvenementModel {
     private $db;
 
     public function __construct(Application $app) {
-        $this->db = $app['db'];//
+        $this->db = $app['db'];
     }
     // http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/query-builder.html#join-clauses
+
     public function getAllEvenements()
     {
-//        $sql = "SELECT p.id, t.libelle, p.nom, p.prix, p.photo
-//            FROM produits as p,typeProduits as t
-//            WHERE p.typeProduit_id=t.id ORDER BY p.nom;";
-//        $req = $this->db->query($sql);
-//        return $req->fetchAll();
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
             ->select('e.id_evenement','e.date_evenement','e.lieu_evenement','e.description_evenement')
@@ -30,62 +26,56 @@ class EvenementModel {
 
     public function insertEvenement($donnees) {
         $queryBuilder = new QueryBuilder($this->db);
-        $queryBuilder->insert('produits')
+        var_dump($donnees);
+        $queryBuilder->insert('Evenement')
             ->values([
-                'nom' => '?',
-                'typeProduit_id' => '?',
-                'prix' => '?',
-                'photo' => '?',
-                'dispo' => '?',
-                'stock' => '?'
+                'date_evenement' => '?',
+                'lieu_evenement' => '?',
+                'description_evenement' => '?'
             ])
-            ->setParameter(0, $donnees['nom'])
-            ->setParameter(1, $donnees['typeProduit_id'])
-            ->setParameter(2, $donnees['prix'])
-            ->setParameter(3, $donnees['photo'])
-            ->setParameter(4, 1)
-            ->setParameter(5, $donnees['stock'])
+            ->setParameter(0, $donnees['date_evenement'])
+            ->setParameter(1, $donnees['lieu_evenement'])
+            ->setParameter(2, $donnees['description'])
         ;
         return $queryBuilder->execute();
     }
 
-    function getEvenement($id) {
+    public function readEvenement($id){
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
-            ->select('id', 'typeProduit_id', 'nom', 'prix', 'photo')
-            ->from('produits')
-            ->where('id= :id')
-            ->setParameter('id', $id);
+            ->select('*')
+            ->from('Evenement')
+            ->where ('id_evenement = ?')
+            ->setParameter (0, $id)
+        ;
         return $queryBuilder->execute()->fetch();
     }
 
-    public function updateEvenement($donnees) {
+    public function deleteEvenement($id){
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
-            ->update('produits')
-            ->set('nom', '?')
-            ->set('typeProduit_id','?')
-            ->set('prix','?')
-            ->set('photo','?')
-            ->where('id= ?')
-            ->setParameter(0, $donnees['nom'])
-            ->setParameter(1, $donnees['typeProduit_id'])
-            ->setParameter(2, $donnees['prix'])
-            ->setParameter(3, $donnees['photo'])
-            ->setParameter(4, $donnees['id']);
-        return $queryBuilder->execute();
-    }
-
-    public function deleteEvenement($id) {
-        $queryBuilder = new QueryBuilder($this->db);
-        $queryBuilder
-            ->delete('produits')
-            ->where('id = :id')
-            ->setParameter('id',(int)$id)
+            ->delete('Evenement')
+            ->where ('id_evenement   = ?')
+            ->setParameter (0, $id)
         ;
+
         return $queryBuilder->execute();
     }
 
-
-
+    public function editEvenement($donnees){
+        $queryBuilder = new QueryBuilder($this->db);
+        var_dump($donnees);
+        $queryBuilder->update('Evenement')
+            ->set('lieu_evenement ', '?')
+            ->set('description_evenement ', '?')
+            ->set('date_evenement', '?')
+            -> where('id_evenement = ?')
+            ->setParameter (0, $donnees["lieu_evenement"])
+            ->setParameter (1, $donnees["description"])
+            ->setParameter (2,$donnees["date_evenement"])
+            ->setParameter (3, $donnees["id_evenement"])
+        ;
+        echo  $queryBuilder;
+        return $queryBuilder->execute();
+    }
 }

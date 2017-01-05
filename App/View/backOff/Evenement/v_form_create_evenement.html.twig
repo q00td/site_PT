@@ -1,0 +1,40 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+
+    <body id="bg">
+    <!-- start: Content -->
+
+<div class="row-fluid">
+
+    <div id="content">
+    <form method="post" action="{{ path("Evenement.validFormAdd") }} ">
+        <div class="row-fluide">
+            <fieldset>
+                <legend>Creer un evenement (twig)</legend>
+
+                <label>lieu_evenement
+                    <input name="lieu_evenement"  type="text"  size="18"  value="{{donnees.lieu_evenement|default("")}}"/>
+                    {% if erreurs.lieu_evenement is defined %}
+                        <small class="error">{{erreurs.lieu_evenement}}</small>
+                    {% endif %}
+                </label>
+                <label>description
+                    <input name="description"  type="text"  size="18" value="{{donnees.description|default("")}}"/>
+                    {% if erreurs.description is defined %}
+                        <small class="error">{{erreurs.description}}</small>
+                    {% endif %}
+                </label>
+                <label>Date de l'evenement
+                    <input name="date_evenement"  type="text"  size="18"  value="{{donnees.date_evenement|default("")}}"/>
+                    {% if erreurs.date_evenement is defined %}
+                        <small class="error">{{erreurs.date_evenement}}</small>
+                    {% endif %}
+                </label>
+                <input type="submit" name="creerEvenement" value="créer" />
+            </fieldset>
+        </div>
+    </form>
+    </div>
+    </form>
+</div>
+{% endblock %}
