@@ -1,0 +1,65 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+<body id="bg">
+<!-- start: Content -->
+
+<div class="row-fluid">
+
+    <div id="content">
+    <form method="post" action="{{ path('Objet.validFormEdit') }}">
+        <div class="row-fluid">
+
+            <fieldset>
+                <legend>Modifier une Annonce </legend>
+                <div id="bloc" class="col-md-6">
+                    <div id="bloc" class="col-md-12">
+
+                        <input name="id_objet"  type="hidden" value="{{objet.id_objet}}"/>
+                        <label>Nom de l'objet
+                            <input name="nom_objet"  type="text"  size="18"  value="{{objet.nom_objet|default("")}}"/>
+                            {% if erreurs.nom_objet is defined %}
+                                <small class="error">{{erreurs.nom_objet}}</small>
+                            {% endif %}
+                        </label>
+                    </div>
+                    <div id="bloc" class="col-md-12">
+
+                        <label>description de l'objet
+                            <input name="description_objet"  type="text"  size="18" value="{{objet.description_objet|default("")}}"/>
+                            {% if erreurs.description_objet is defined %}
+                                <small class="error">{{erreurs.description}}</small>
+                            {% endif %}description_objet
+                        </label>
+
+                    </div>
+                    <div id="bloc" class="col-md-12">
+
+                    <label>Lieu
+                    <input name="lieu_objet"  type="text"  size="18" value="{{objet.lieu_objet|default("")}}"/>
+                    {% if erreurs.lieu_objet is defined %}
+                        <small class="error">{{erreurs.lieu_objet}}</small>
+                    {% endif %}
+                    </label>
+                        <div id="bloc" class="col-md-12">
+
+
+                        <label>Prix
+                    <input name="prix_objet"  type="text"  size="18" value="{{objet.prix_objet|default("")}}"/>
+                    {% if erreurs.prix_objet is defined %}
+                        <small class="error">{{erreurs.prix_objet}}</small>
+                    {% endif %}
+                </label>
+                        </div>
+                        <div id="bloc" class="col-md-12">
+
+
+                        <input type="submit" name="Modifierobjet" value="Modifier" />
+
+            </fieldset>
+        </div>
+    </form>
+    </div>
+    </form>
+</div>
+
+{% endblock %}

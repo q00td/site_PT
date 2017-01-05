@@ -27,6 +27,22 @@ class ObjetModel {
             ->addOrderBy('e.nom_objet','ASC');
         return $queryBuilder->execute()->fetchAll();
     }
+    public function getAllPObjets($id)
+    {
+//        $sql = "SELECT p.id, t.libelle, p.nom, p.prix, p.photo
+//            FROM produits as p,typeProduits as t
+//            WHERE p.typeProduit_id=t.id ORDER BY p.nom;";
+//        $req = $this->db->query($sql);
+//        return $req->fetchAll();
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('*')
+            ->from('Objet')
+            ->where('id_user= :id_user')
+            ->setParameter('id_user', $id)
+            ->addOrderBy('nom_objet','ASC');
+        return $queryBuilder->execute()->fetchAll();
+    }
 
     public function insertObjet($donnees,$id) {
         $queryBuilder = new QueryBuilder($this->db);
@@ -49,39 +65,39 @@ class ObjetModel {
         return $queryBuilder->execute();
     }
 
-    function getObjet($id) {
+    function readObjet($id) {
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
-            ->select('id', 'typeProduit_id', 'nom', 'prix', 'photo')
-            ->from('produits')
-            ->where('id= :id')
-            ->setParameter('id', $id);
+            ->select('*')
+            ->from('Objet')
+            ->where('id_objet= :id_objet')
+            ->setParameter('id_objet', $id);
         return $queryBuilder->execute()->fetch();
     }
 
-    public function updateObjet($donnees) {
+    public function editObjet($donnees) {
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
-            ->update('produits')
-            ->set('nom', '?')
-            ->set('typeProduit_id','?')
-            ->set('prix','?')
-            ->set('photo','?')
-            ->where('id= ?')
-            ->setParameter(0, $donnees['nom'])
-            ->setParameter(1, $donnees['typeProduit_id'])
-            ->setParameter(2, $donnees['prix'])
-            ->setParameter(3, $donnees['photo'])
-            ->setParameter(4, $donnees['id']);
+            ->update('Objet')
+            ->set('nom_objet', '?')
+            ->set('description_objet','?')
+            ->set('lieu_objet','?')
+            ->set('prix_objet','?')
+            ->where('id_objet= ?')
+            ->setParameter(0, $donnees['nom_objet'])
+            ->setParameter(1, $donnees['description_objet'])
+            ->setParameter(2, $donnees['lieu_objet'])
+            ->setParameter(3, $donnees['prix_objet'])
+            ->setParameter(4, $donnees['id_objet']);
         return $queryBuilder->execute();
     }
 
     public function deleteObjet($id) {
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
-            ->delete('produits')
-            ->where('id = :id')
-            ->setParameter('id',(int)$id)
+            ->delete('Objet')
+            ->where('id_objet = :id_objet')
+            ->setParameter('id_objet',(int)$id)
         ;
         return $queryBuilder->execute();
     }

@@ -8,7 +8,7 @@
         <div id="content">
             <div id="Events" class="col-md-12">
                 <div class="col-md-4">
-                    <a href="" id="Events"><h4 class="text-blanc">Vos Annonces</h4></a>
+                    <a href="{{ path('Objet.pShow') }}" id="Events"><h4 class="text-blanc">Vos Annonces</h4></a>
                 </div>
                 <div class="col-md-4">
                     <a href="{{ path('Objet.add') }}" id="Events"><h4 class="text-blanc">Ajouter une annonce</h4></a>
@@ -38,19 +38,29 @@
                 <div class="col-md-4 col-lg-4 col-md-4">
                     <div class="thumbnail">
                         <div class="caption">
-                            <div class="col-md-7">
+                            <div class="col-md-5">
                                 <h4>{{ objet.nom_objet }}</h4>
+                            </div>
+                            <div class="col-md-2">
+                                <h6>{{ objet.prix_objet }}€</h6>
                             </div>
                             <div class="col-md-5">
                                 <form action="" >
                                     <input type="submit" value="Voir la personne" />
                                 </form>
                             </div>
-                            <div class="col-md-10">
+                            <div class="col-md-8">
                                 <h6>{{ objet.description_objet }} ( sur {{ objet.lieu_objet }} )</h6>
                             </div>
-                            <div class="col-md-2">
-                                <h6>{{ objet.prix_objet }}€</h6>
+
+                            <div class="col-md-4">
+
+                                <form action="{{ path('Objet.edit', {id: objet.id_objet}) }}" >
+                                    <input type="submit" value="Modifier" /></form>
+
+                            <form action="{{ path('Objet.delete', {id: objet.id_objet}) }}" >
+                                    <input type="submit" value="Supprimer" /></form>
+
                             </div>
 
                         </div>
