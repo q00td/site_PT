@@ -46,17 +46,23 @@
                 </div>
                     <div class="col-md-4">
                         <form action="" >
-                            <input type="submit" value="Participer!" />
-                            <a href="{{ path('Evenement.edit', {id: evenement.id_evenement}) }}">modifier</a>
-                            <a href="{{ path('Evenement.delete', {id: evenement.id_evenement}) }}">supprimer</a>
+                            <input type="submit" value="Participer !" />
                         </form>
                     </div>
-                <div class="col-md-12">
+
+
+
+                <div class="col-md-8">
                 <h6>{{ evenement.description_evenement }}</h6>
                 </div>
+                    <div class="col-md-4">
 
+                    <form action="{{ path('Evenement.edit', {id: evenement.id_evenement}) }}" >
+                        <input type="submit" value="Modifier" /></form>
+                    <form action="{{ path('Evenement.delete', {id: evenement.id_evenement}) }}" >
+                        <input type="submit" value="Supprimer" /></form>
 
-
+                    </div>
             </div>
             </div>
         </div>
