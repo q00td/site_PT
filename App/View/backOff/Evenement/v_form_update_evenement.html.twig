@@ -1,0 +1,44 @@
+{% extends "layout.html.twig" %}
+{% block contenu %};
+
+<body id="bg">
+<!-- start: Content -->
+
+<div class="row-fluid">
+
+    <div id="content">
+    <form method="post" action="{{ path('Evenement.validFormEdit') }}">
+        <div class="row-fluid">
+
+            <fieldset>
+                <legend>Modifier un evenement </legend>
+                <input name="id_evenement"  type="hidden" value="{{evenement.id_evenement}}"/>
+                <label>lieu de l'evenement
+                    <input name="lieu_evenement"  type="text"  size="18"  value="{{evenement.lieu_evenement|default("")}}"/>
+                    {% if erreurs.lieu_evenement is defined %}
+                        <small class="error">{{erreurs.lieu_evenement}}</small>
+                    {% endif %}
+                </label>
+                <label>description
+                    <input name="description"  type="text"  size="18" value="{{evenement.description|default("")}}"/>
+                    {% if erreurs.description is defined %}
+                        <small class="error">{{erreurs.description}}</small>
+                    {% endif %}
+                </label>
+                <label>Date lancement
+                    <input name="date_evenement"  type="text"  size="18" value="{{evenement.date_evenement|default("")}}"/>
+                    {% if erreurs.date_evenement is defined %}
+                        <small class="error">{{erreurs.date_evenement}}</small>
+                    {% endif %}
+                </label>
+
+                <input type="submit" name="Modifierevenement" value="Modifier" />
+
+            </fieldset>
+        </div>
+    </form>
+    </div>
+    </form>
+</div>
+
+{% endblock %}

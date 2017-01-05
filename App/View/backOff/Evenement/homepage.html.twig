@@ -47,6 +47,8 @@
                     <div class="col-md-4">
                         <form action="" >
                             <input type="submit" value="Participer!" />
+                            <a href="{{ path('Evenement.edit', {id: evenement.id_evenement}) }}">modifier</a>
+                            <a href="{{ path('Evenement.delete', {id: evenement.id_evenement}) }}">supprimer</a>
                         </form>
                     </div>
                 <div class="col-md-12">

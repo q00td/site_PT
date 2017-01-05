@@ -93,7 +93,7 @@ class EvenementController implements ControllerProviderInterface
                 $this->EvenementModel = new EvenementModel($app);
                 $this->EvenementModel->insertEvenement($donnees);
                 var_dump($donnees);
-                return $app->redirect($app["url_generator"]->generate("evenement.show"));
+                return $app->redirect($app["url_generator"]->generate("Evenement.show"));
             }
 
         }else
@@ -111,7 +111,7 @@ class EvenementController implements ControllerProviderInterface
 
         $this->EvenementModel = new EvenementModel($app);
         $this->EvenementModel->deleteEvenement($id);
-        return $app->redirect($app["url_generator"]->generate("evenement.show"));
+        return $app->redirect($app["url_generator"]->generate("Evenement.show"));
     }
 
     public function edit(Application $app, $id) {
@@ -139,14 +139,14 @@ class EvenementController implements ControllerProviderInterface
         if(! empty($erreurs)) {
             $typeEvenements=$this->EvenementModel->getAllTypeEvenements();
 
-            return $app["twig"]->render('backOff/Evenement/v_form_update_Evenement.html.twig',['Evenement'=>$donnees,'erreurs'=>$erreurs,
+            return $app["twig"]->render('backOff/Evenement/v_form_update_evenement.html.twig',['Evenement'=>$donnees,'erreurs'=>$erreurs,
                 'typeEvenements' => $typeEvenements]);
         }
         else
         {
             $this->EvenementModel = new EvenementModel($app);
             $this->EvenementModel->editEvenement($donnees);
-            return $app->redirect($app["url_generator"]->generate("evenement.show"));
+            return $app->redirect($app["url_generator"]->generate("Evenement.show"));
         }
 
     }
@@ -165,7 +165,7 @@ class EvenementController implements ControllerProviderInterface
         $controllers->delete('/delete', 'App\Controller\EvenementController::validFormDelete')->bind('Evenement.validFormDelete');
 
         $controllers->get('/edit/{id}', 'App\Controller\EvenementController::edit')->bind('Evenement.edit')->assert('id', '\d+');;
-        $controllers->put('/edit', 'App\Controller\EvenementController::validFormEdit')->bind('Evenement.validFormEdit');
+        $controllers->post('/edit', 'App\Controller\EvenementController::validFormEdit')->bind('Evenement.validFormEdit');
 
 
         return $controllers;
