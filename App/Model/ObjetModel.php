@@ -60,6 +60,22 @@ class ObjetModel {
 
         return $queryBuilder->execute()->fetchAll();
     }
+    public function getUser($user)
+    {
+//        $sql = "SELECT p.id, t.libelle, p.nom, p.prix, p.photo
+//            FROM produits as p,typeProduits as t
+//            WHERE p.typeProduit_id=t.id ORDER BY p.nom;";
+//        $req = $this->db->query($sql);
+//        return $req->fetchAll();
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('*')
+            ->from('User')
+            ->where('id_user= :id_user')
+            ->setParameter('id_user', $user);
+
+        return $queryBuilder->execute()->fetchAll();
+    }
 
     public function insertObjet($donnees,$id) {
         $queryBuilder = new QueryBuilder($this->db);

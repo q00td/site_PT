@@ -36,10 +36,16 @@ class ObjetController implements ControllerProviderInterface
         return $app["twig"]->render('backOff/Objet/Objet.html.twig',['data'=>$Objets]);
     }
     public function search(Application $app) {
-        $chaine=$_POST['text'];
+        $user=$_POST['user'];
         $this->ObjetModel = new ObjetModel($app);
-        $Objets = $this->ObjetModel->search($chaine);
-        return $app["twig"]->render('backOff/Objet/Objet.html.twig',['data'=>$Objets]);
+        $Objets = $this->ObjetModel->getUser($user);
+        return $app["twig"]->render('backOff/Objet/user.html.twig',['data'=>$Objets]);
+    }
+    public function getUser(Application $app) {
+        $chaine=$_POST['user'];
+        $this->ObjetModel = new ObjetModel($app);
+        $Objets = $this->ObjetModel->getUser($chaine);
+        return $app["twig"]->render('backOff/Objet/user.html.twig',['data'=>$Objets]);
     }
 
 
@@ -152,6 +158,9 @@ class ObjetController implements ControllerProviderInterface
 
         $controllers->get('/search', 'App\Controller\ObjetController::search')->bind('Objet.search');
         $controllers->post('/search', 'App\Controller\ObjetController::search')->bind('Objet.search');
+
+        $controllers->get('/getUser', 'App\Controller\ObjetController::getUser')->bind('Objet.getUser');
+        $controllers->post('/getUser', 'App\Controller\ObjetController::getUser')->bind('Objet.getUser');
 
 
 

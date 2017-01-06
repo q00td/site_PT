@@ -45,7 +45,8 @@
                                 <h6>{{ objet.prix_objet }}€</h6>
                             </div>
                             <div class="col-md-5">
-                                <form action="" >
+                                <form method="post" action="{{ path('Objet.getUser') }}" >
+                                    <input type="hidden" name="user" value="{{ objet.id_user }}">
                                     <input type="submit" value="Voir la personne" />
                                 </form>
                             </div>
