@@ -44,6 +44,7 @@ class ObjetController implements ControllerProviderInterface
     public function getUser(Application $app) {
         $chaine=$_POST['user'];
         $this->ObjetModel = new ObjetModel($app);
+        //
         $Objets = $this->ObjetModel->getUser($chaine);
         return $app["twig"]->render('backOff/Objet/user.html.twig',['data'=>$Objets]);
     }
