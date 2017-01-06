@@ -14,7 +14,7 @@
                     <a href="{{ path('Objet.add') }}" id="Events"><h4 class="text-blanc">Ajouter une annonce</h4></a>
                 </div>
                 <div class="col-md-4">
-                    <form action="" >
+                    <form method="post" action="{{ path('Objet.search')  }}" >
                         <input name="text" type="text" value="Chercher une Annonce">
                         <input type="submit" value="Valider" />
                     </form>

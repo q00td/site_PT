@@ -43,6 +43,23 @@ class ObjetModel {
             ->addOrderBy('nom_objet','ASC');
         return $queryBuilder->execute()->fetchAll();
     }
+    public function search($text)
+    {
+//        $sql = "SELECT p.id, t.libelle, p.nom, p.prix, p.photo
+//            FROM produits as p,typeProduits as t
+//            WHERE p.typeProduit_id=t.id ORDER BY p.nom;";
+//        $req = $this->db->query($sql);
+//        return $req->fetchAll();
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('*')
+            ->from('Objet')
+            ->where('description_objet LIKE :word')
+            ->setParameter('word', '%'.$text.'%')
+            ->addOrderBy('nom_objet','ASC');
+
+        return $queryBuilder->execute()->fetchAll();
+    }
 
     public function insertObjet($donnees,$id) {
         $queryBuilder = new QueryBuilder($this->db);

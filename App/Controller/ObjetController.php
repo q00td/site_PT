@@ -35,6 +35,12 @@ class ObjetController implements ControllerProviderInterface
         $Objets = $this->ObjetModel->getAllPObjets($app['session']->get('user_id'));
         return $app["twig"]->render('backOff/Objet/Objet.html.twig',['data'=>$Objets]);
     }
+    public function search(Application $app) {
+        $chaine=$_POST['text'];
+        $this->ObjetModel = new ObjetModel($app);
+        $Objets = $this->ObjetModel->search($chaine);
+        return $app["twig"]->render('backOff/Objet/Objet.html.twig',['data'=>$Objets]);
+    }
 
 
     public function add(Application $app) {
@@ -143,6 +149,11 @@ class ObjetController implements ControllerProviderInterface
 
         $controllers->get('/add', 'App\Controller\ObjetController::add')->bind('Objet.add');
         $controllers->post('/add', 'App\Controller\ObjetController::validFormAdd')->bind('Objet.validFormAdd');
+
+        $controllers->get('/search', 'App\Controller\ObjetController::search')->bind('Objet.search');
+        $controllers->post('/search', 'App\Controller\ObjetController::search')->bind('Objet.search');
+
+
 
         $controllers->get('/delete/{id}', 'App\Controller\ObjetController::delete')->bind('Objet.delete')->assert('id', '\d+');;
         $controllers->delete('/delete', 'App\Controller\ObjetController::validFormDelete')->bind('Objet.validFormDelete');
