@@ -1,0 +1,29 @@
+{% extends "layout.html.twig" %}
+
+{% block contenu %}
+
+    <body id="bg">
+<!-- start: Content -->
+
+<div class="row-fluid">
+
+    <div id="content">
+        <form method="post" action="{{ path('Emploi.validFormDelete') }}">
+            <div class="row-fluid">
+
+                <fieldset>
+                    <input name="id"  type="hidden" value="{{ id }}"/>
+
+                    <label>Etes-vous sur de vouloir supprimer l'emploi d'identifiant {{ id }} ?
+                    </label>
+
+                    <input type="hidden" id="_method" name="_method" value="DELETE" />
+                    <input type="submit" name="Supprimer" value="Supprimer" />
+
+                </fieldset>
+            </div>
+        </form>
+    </div>
+    </form>
+</div>
+{% endblock %}

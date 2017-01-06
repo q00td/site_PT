@@ -78,4 +78,15 @@ class EvenementModel {
         echo  $queryBuilder;
         return $queryBuilder->execute();
     }
+
+    public function  searchEvenements($donnees){
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('e.id_evenement','e.date_evenement','e.lieu_evenement','e.description_evenement')
+            ->from('Evenement', 'e')
+            ->where ('description_evenement')
+            ->like('%',$donnees['description'],'%')
+            ->addOrderBy('e.date_evenement','ASC');
+        return $queryBuilder->execute()->fetchAll();
+    }
 }

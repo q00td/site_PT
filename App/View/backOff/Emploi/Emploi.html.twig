@@ -1,0 +1,85 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+    <body id="bg">
+    <!-- start: Content -->
+
+    <div class="row-fluid">
+
+        <div id="content">
+            <div id="Events" class="col-md-12">
+                <div class="col-md-4">
+                    <a href="" id="Emplois"><h4 class="text-blanc">Emplois</h4></a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{{ path('Emploi.add') }}" id="Events"><h4 class="text-blanc">En créer un</h4></a>
+                </div>
+                <div class="col-md-4">
+                    <form action="{#{{ path('Emploi.search') }}#}" >
+                        <input name="text" type="text" value="Chercher un emploi">
+                        <input type="submit" value="Valider" />
+                    </form>
+                </div>
+
+
+            </div>
+            {#<div id="sidenavbar" class="col-md-3">#}
+            {#<div class="nav-collapse sidebar-nav">#}
+            {#<ul class="nav nav-tabs nav-stacked main-menu">#}
+            {#<li><a href="{{ path('produit.show')}}"><span class="hidden-tablet"> Acceuil</span></a></li>#}
+            {#<li><a href="index.html.twig">Message</a></li>#}
+            {#<li><a href="{{ path('Emploi.show')}}">Emplois</a></li>#}
+            {#<li><a href="index.html.twig">Prof</a></li>#}
+
+            {#</ul>#}
+            {#</div>#}
+
+            {#</div>#}
+            {% for Emploi in data if data is not empty %}
+                <div class="col-md-4 col-lg-4 col-md-4">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <div class="col-md-4">
+                                <h4>{{ Emploi.poste_emploi }}</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>{{ Emploi.type_emploi }}</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>{{ Emploi.date_debut_emploi }}</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>{{ Emploi.date_fin_emploi }}</h4>
+                            </div>
+
+                            <div class="col-md-8">
+                                <h6>{{ Emploi.description_emploi }}</h6>
+                            </div>
+                            <div class="col-md-4">
+
+                                <form action="{{ path('Emploi.edit', {id: Emploi.id_emploi}) }}" >
+                                    <input type="submit" value="Modifier" /></form>
+                                <form action="{{ path('Emploi.delete', {id: Emploi.id_emploi}) }}" >
+                                    <input type="submit" value="Supprimer" /></form>
+
+                            </div>
+                            <div class="col-md-4">
+                                <form action="" >
+                                    <input type="submit" value="Postuler !" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+
+
+        </div>
+    </div>
+
+
+    </body>
+
+{% endblock %}
+

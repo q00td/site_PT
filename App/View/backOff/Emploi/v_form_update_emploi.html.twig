@@ -1,0 +1,56 @@
+{% extends "layout.html.twig" %}
+{% block contenu %};
+
+<body id="bg">
+<!-- start: Content -->
+
+<div class="row-fluid">
+
+    <div id="content">
+        <form method="post" action="{{ path('Emploi.validFormEdit') }}">
+            <div class="row-fluid">
+
+                <fieldset>
+                    <legend>Modifier un evenement </legend>
+                    <input name="id_emploi"  type="hidden" value="{{Emploi.id_emploi}}"/>
+                    <label>Poste
+                        <input name="poste_emploi"  type="text"  size="18"  value="{{emploi.poste_emploi|default("")}}"/>
+                        {% if erreurs.poste_emploi is defined %}
+                            <small class="error">{{erreurs.poste_emploi}}</small>
+                        {% endif %}
+                    </label>
+                    <label>Type d'emploi
+                        <input name="type_emploi"  type="text"  size="18"  value="{{emploi.type_emploi|default("")}}"/>
+                        {% if erreurs.type_emploi is defined %}
+                            <small class="error">{{erreurs.type_emploi}}</small>
+                        {% endif %}
+                    </label>
+                    <label>date de debut
+                        <input name="date_debut_emploi"  type="text"  size="18" value="{{emploi.date_debut_emploi|default("")}}"/>
+                        {% if erreurs.date_debut_emploi is defined %}
+                            <small class="error">{{erreurs.date_debut_emploi}}</small>
+                        {% endif %}
+                    </label>
+                    <label>Date de fin
+                        <input name="date_fin_emploi"  type="text"  size="18"  value="{{emploi.date_fin_emploi|default("")}}"/>
+                        {% if erreurs.date_fin_emploi is defined %}
+                            <small class="error">{{erreurs.date_fin_emploi}}</small>
+                        {% endif %}
+                    </label>
+                    <label>description
+                        <input name="description_emploi"  type="text"  size="18"  value="{{emploi.description_emploi|default("")}}"/>
+                        {% if erreurs.description_emploi is defined %}
+                            <small class="error">{{erreurs.description_emploi}}</small>
+                        {% endif %}
+                    </label>
+
+                    <input type="submit" name="Modifierevenement" value="Modifier" />
+
+                </fieldset>
+            </div>
+        </form>
+    </div>
+    </form>
+</div>
+
+{% endblock %}

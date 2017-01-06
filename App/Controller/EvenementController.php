@@ -151,12 +151,21 @@ class EvenementController implements ControllerProviderInterface
 
     }
 
+    public function search(Application $app) {
+        $this->EvenementModel = new EvenementModel($app);
+        $Evenements = $this->EvenementModel->searchEvenements();
+        var_dump($Evenements);
+        return $app["twig"]->render('backOff/Evenement/homepage.html.twig',['data'=>$Evenements]);
+    }
+
 
     public function connect(Application $app) {  //http://silex.sensiolabs.org/doc/providers.html#controller-providers
         $controllers = $app['controllers_factory'];
 
         $controllers->get('/', 'App\Controller\EvenementController::index')->bind('Evenement.index');
         $controllers->get('/show', 'App\Controller\EvenementController::show')->bind('Evenement.show');
+
+        $controllers->get('/show', 'App\Controller\EvenementController::search')->bind('Evenement.search');
 
         $controllers->get('/add', 'App\Controller\EvenementController::add')->bind('Evenement.add');
         $controllers->post('/add', 'App\Controller\EvenementController::validFormAdd')->bind('Evenement.validFormAdd');
