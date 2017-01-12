@@ -25,6 +25,13 @@ background: #949494;
 #loginBox {
 
 }
+#letter2{
+    font-family:"CaviarDreams_Bold.ttf";
+    font-size: 90px;
+}
+#emploi{
+    height: 200px;
+}
 #News2{
     height: 150px;
     display: block;
@@ -34,11 +41,28 @@ background: #949494;
     line-height: 1.42857143;
     border: 3px solid lightgray;
     text-align: center;
-    font-family:"CaviarDreams_Bold.ttf";
-    font-size: 90px;
+
     -webkit-transition: border .2s ease-in-out;
     -o-transition: border .2s ease-in-out;
     transition: border .2s ease-in-out;
+}
+.thumbnail2 {
+    height: 200px;
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
+#banner{
+    height:55PX ;
+
+
 }
 #News{
     height: 150px;
