@@ -27,6 +27,20 @@ class ObjetModel {
             ->addOrderBy('e.nom_objet','ASC');
         return $queryBuilder->execute()->fetchAll();
     }
+    public function getLast()
+    {
+//        $sql = "SELECT p.id, t.libelle, p.nom, p.prix, p.photo
+//            FROM produits as p,typeProduits as t
+//            WHERE p.typeProduit_id=t.id ORDER BY p.nom;";
+//        $req = $this->db->query($sql);
+//        return $req->fetchAll();
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('*')
+            ->from('Objet')
+            ->addOrderBy('id_objet','DESC');
+        return $queryBuilder->execute()->fetch();
+    }
     public function getAllPObjets($id)
     {
 //        $sql = "SELECT p.id, t.libelle, p.nom, p.prix, p.photo

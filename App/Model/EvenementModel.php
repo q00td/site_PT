@@ -23,6 +23,20 @@ class EvenementModel {
             ->addOrderBy('e.date_evenement','ASC');
         return $queryBuilder->execute()->fetchAll();
     }
+    public function getLast()
+    {
+//        $sql = "SELECT p.id, t.libelle, p.nom, p.prix, p.photo
+//            FROM produits as p,typeProduits as t
+//            WHERE p.typeProduit_id=t.id ORDER BY p.nom;";
+//        $req = $this->db->query($sql);
+//        return $req->fetchAll();
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('*')
+            ->from('Evenement')
+            ->addOrderBy('id_evenement','DESC');
+        return $queryBuilder->execute()->fetch();
+    }
 
     public function insertEvenement($donnees) {
         $queryBuilder = new QueryBuilder($this->db);

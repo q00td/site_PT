@@ -2,6 +2,11 @@
 namespace App\Controller;
 
 use App\Model\CommandeModel;
+use App\Model\ObjetModel;
+
+use App\Model\EmploiModel;
+use App\Model\EvenementModel;
+
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 
@@ -27,8 +32,14 @@ class ProduitController implements ControllerProviderInterface
     }
 
     public function show(Application $app) {
+        $this->ObjetModel = new ObjetModel($app);
+        $Objets = $this->ObjetModel->getLast();
+      $this->EvenementModel = new EvenementModel($app);
+        $Event = $this->EvenementModel->getLast();
+        $this->EmploiModel = new EmploiModel($app);
+        $Emploi = $this->EmploiModel->getLast();
 
-        return $app["twig"]->render('backOff/Accueil/homepage.html.twig');
+        return $app["twig"]->render('backOff/Accueil/homepage.html.twig',['objet'=>$Objets,'event'=>$Event,'emploi'=>$Emploi]);
     }
 
 
