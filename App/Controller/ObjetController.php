@@ -36,10 +36,10 @@ class ObjetController implements ControllerProviderInterface
         return $app["twig"]->render('backOff/Objet/Objet.html.twig',['data'=>$Objets]);
     }
     public function search(Application $app) {
-        $user=$_POST['user'];
+        $user=$_POST['text'];
         $this->ObjetModel = new ObjetModel($app);
-        $Objets = $this->ObjetModel->getUser($user);
-        return $app["twig"]->render('backOff/Objet/user.html.twig',['data'=>$Objets]);
+        $Objets = $this->ObjetModel->search($user);
+        return $app["twig"]->render('backOff/Objet/Objet.html.twig',['data'=>$Objets]);
     }
     public function getUser(Application $app) {
         $chaine=$_POST['user'];
