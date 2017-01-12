@@ -167,8 +167,7 @@ class EvenementController implements ControllerProviderInterface
         $controllers->get('/', 'App\Controller\EvenementController::index')->bind('Evenement.index');
         $controllers->get('/show', 'App\Controller\EvenementController::show')->bind('Evenement.show');
 
-        $controllers->get('/search', 'App\Controller\EvenementController::search')->bind('Evenement.search');
-        $controllers->post('/search', 'App\Controller\EvenementController::search')->bind('Evenement.search');
+
 
         $controllers->get('/add', 'App\Controller\EvenementController::add')->bind('Evenement.add');
         $controllers->post('/add', 'App\Controller\EvenementController::validFormAdd')->bind('Evenement.validFormAdd');
@@ -178,7 +177,8 @@ class EvenementController implements ControllerProviderInterface
 
         $controllers->get('/edit/{id}', 'App\Controller\EvenementController::edit')->bind('Evenement.edit')->assert('id', '\d+');;
         $controllers->post('/edit', 'App\Controller\EvenementController::validFormEdit')->bind('Evenement.validFormEdit');
-
+        $controllers->get('/search', 'App\Controller\EvenementController::search')->bind('Evenement.search');
+        $controllers->post('/search', 'App\Controller\EvenementController::search')->bind('Evenement.search');
 
         return $controllers;
     }
