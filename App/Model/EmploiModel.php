@@ -32,6 +32,20 @@ class EmploiModel
             ->addOrderBy('id_emploi','DESC');
         return $queryBuilder->execute()->fetch();
     }
+
+    public function getUser($id)
+    {
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('u.nom_user','u.prenom_user','u.e_mail')
+            ->from('User', 'u')
+            ->innerJoin('u', 'Propose', 'p', 'u.id_user=p.id_user')
+            ->innerJoin('p', 'Emploi', 'e', 'p.id_emploi=e.id_emploi')
+            ->where('p.id_user=?')
+            ->setParameter(0,$id);
+
+        return $queryBuilder->execute()->fetchAll();
+    }
     public function getAllEmplois()
     {
         $queryBuilder = new QueryBuilder($this->db);

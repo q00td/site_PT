@@ -65,8 +65,9 @@
                         </div>
                         <div class="col-md-4">
 
-                        <form action="" >
-                                    <input type="submit" value="Postuler !" />
+                        <form action="{{ path('Emploi.getUser' , {id: Emploi.id_emploi})}}" >
+                            <input type="hidden" name="id" value="{{ Emploi.id_emploi }}">
+                                    <input type="submit" value="contacter" />
                                 </form>
                         </div>
                             </div>

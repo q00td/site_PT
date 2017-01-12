@@ -21,10 +21,14 @@
                 <li><a href="{{ path('Emploi.show')}}"><span class="hidden-tablet"> Emploi</span></a></li>
 
                 <li><a href="{{ path('Evenement.show')}}"><span class="hidden-tablet"> Evenements</span></a></li>
+
+
                 {% if   app.session.get('logged') is defined and  app.session.get('logged') == 1 %}
                     <li><a href="">{{ app.session.get('login') }}</a></li>
                     <li><a href="{{ path('user.logout')  }}">Se déconnecter</a></li>
                 {% else %}
+
+
                     <li><a href="{{ path('user.login')  }}">Se connecter</a></li>
                 {% endif %}
 

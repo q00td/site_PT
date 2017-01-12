@@ -35,6 +35,12 @@ class EmploiController implements ControllerProviderInterface
         $Emplois = $this->EmploiModel->getAllEmplois();
         return $app["twig"]->render('backOff/Emploi/Emploi.html.twig',['data'=>$Emplois]);
     }
+    public function getUser(Application $app,$id) {
+        $this->EmploiModel = new EmploiModel($app);
+        $Objets = $this->EmploiModel->getUser($id);
+        //var_dump($Objets);
+        return $app["twig"]->render('backOff/Emploi/user.html.twig',['user'=>$Objets]);
+    }
 
 
     public function add(Application $app) {
@@ -152,6 +158,10 @@ class EmploiController implements ControllerProviderInterface
 
         $controllers->get('/add', 'App\Controller\EmploiController::add')->bind('Emploi.add');
         $controllers->post('/add', 'App\Controller\EmploiController::validFormAdd')->bind('Emploi.validFormAdd');
+
+        $controllers->get('/getUser/{id}', 'App\Controller\EmploiController::getUser')->bind('Emploi.getUser')->assert('id', '\d+');;
+
+
 
         $controllers->get('/delete/{id}', 'App\Controller\EmploiController::delete')->bind('Emploi.delete')->assert('id', '\d+');;
         $controllers->delete('/delete', 'App\Controller\EmploiController::validFormDelete')->bind('Emploi.validFormDelete');
