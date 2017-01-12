@@ -2,39 +2,45 @@
 {% extends "layout.html.twig" %}
 {% block contenu %}
 <body id="bg">
-<div class="container-fluid-full">
-    <div class="row-fluid">
+<div class="row-fluid">
 
-        <div class="row-fluid">
-            <div class="login-box">
-                <div class="icons">
-                    <a href="App/View/index.html.twig"><i class="halflings-icon home"></i></a>
-                    <a href="#"><i class="halflings-icon cog"></i></a>
-                </div>
-                <h2>Se connecter</h2>
+    <div id="content">
+        <div class="col-md-4 col-lg-4 col-md-4" id="loginBox">
+        </div>
+        <div class="col-md-4 col-lg-4 col-md-4" id="loginBox">
+            <div id="News2" >
                 <form class="form-horizontal" action="{{ path('user.validFormlogin') }}" method="post">
                     <fieldset>
 
-                        <div class="input-prepend" title="Username">
-                            <input class="input-large span10" name="login" id="username" type="text" placeholder="type username"/>
+                        <div class="input-prepend " title="Username">
+                           <input class="span12" name="login" id="username" type="text" placeholder="Nom de compte :"/>
                         </div>
                         <div class="clearfix"></div>
 
                         <div class="input-prepend" title="Password">
-                            <input class="input-large span10" name="password" id="password" type="password" placeholder="type password"/>
+                             <input class="span12" name="password" id="password" type="password" placeholder="Mot de Passe"/>
+
                         </div>
-                        <div class="clearfix"></div>
 
                         <div class="button-login">
-                            <button type="submit" class="btn btn-primary">Entrer</button>
+                            <button type="submit" class="span12 btn btn-primary ">Entrer</button>
                         </div>
+                        <div class="input-prepend" title="Password">
+
+
+                        </div>
+
                         <div class="clearfix"></div>
                 </form>
-                <hr>
+                <form action="{{ path('user.validFormlogin') }}">
+                    <button type="submit" class="span12 btn btn-primary"> Créer un compte </button>
+                </form>
+            </div>
+        </div>
 
-            </div><!--/span-->
-        </div><!--/row-->
 
 
     </div><!--/.fluid-container-->
+</div>
+</body>
 {% endblock %}
