@@ -42,7 +42,7 @@ CREATE TABLE User(
         PRIMARY KEY (id_user )
 )ENGINE=InnoDB;
 
-INSERT INTO User VALUES(NULL,'Hugo','Hugo','Vicaire','199999999','vicairehugo@gmail.com','aaa','1996-06-25','STMG',NULL,1,1);
+INSERT INTO User VALUES(NULL,'Hugo','Hugo','Vicaire','199999999','vicairehugo@gmail.com','aaa','1996-06-25','STMG',1,1,1);
 INSERT INTO User VALUES(NULL,'Quentin','Quentin','Oternaud','199999999','vicairehugo@gmail.com','aaa','1996-06-25','STMG',2,1,1);
 
 
