@@ -54,16 +54,18 @@
                                 <h6>{{ objet.description_objet }} ( sur {{ objet.lieu_objet }} )</h6>
                             </div>
 
+
+                            {% if   app.session.get('user_id') is defined and  app.session.get('user_id') == 1 %}
                             <div class="col-md-4">
 
-                                <form action="{{ path('Objet.edit', {id: objet.id_objet}) }}" >
-                                    <input type="submit" value="Modifier" /></form>
+                                    <form action="{{ path('Objet.edit', {id: objet.id_objet}) }}" >
+                                        <input type="submit" value="Modifier" /></form>
 
-                            <form action="{{ path('Objet.delete', {id: objet.id_objet}) }}" >
-                                    <input type="submit" value="Supprimer" /></form>
+                                <form action="{{ path('Objet.delete', {id: objet.id_objet}) }}" >
+                                        <input type="submit" value="Supprimer" /></form>
 
-                            </div>
-
+                                </div>
+                            {%  endif %}
                         </div>
                     </div>
                 </div>
