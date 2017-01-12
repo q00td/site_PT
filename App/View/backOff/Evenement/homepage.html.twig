@@ -55,7 +55,7 @@
                 <div class="col-md-8">
                 <h6>{{ evenement.description_evenement }}</h6>
                 </div>
-                    {% if   app.session.get('user_id') is defined and  app.session.get('user_id') == 1 %}
+                    {% if   app.session.get('id_type_user') is defined and  app.session.get('id_type_user') == 1 %}
                         <div class="col-md-4">
 
                         <form action="{{ path('Evenement.edit', {id: evenement.id_evenement}) }}" >

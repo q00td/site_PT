@@ -14,7 +14,11 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                {% if   (app.session.get('user_id') is defined and  app.session.get('user_id') == 1) or  (app.session.get('user_id') is defined and  app.session.get('user_id') == 2) %}
+                {% if   (app.session.get('id_type_user') is defined and  app.session.get('id_type_user') == 1)
+                or  (app.session.get('id_type_user') is defined and  app.session.get('id_type_user') == 2)
+                or  (app.session.get('id_type_user') is defined and  app.session.get('id_type_user') == 3)
+                or  (app.session.get('id_type_user') is defined and  app.session.get('id_type_user') == 4)
+                or  (app.session.get('id_type_user') is defined and  app.session.get('id_type_user') == 5)%}
                 <li><a href="{{ path('produit.show')}}"><span class="hidden-tablet"> Acceuil</span></a></li>
                 <li><a href="{{ path('Cours.show')}}"><span class="hidden-tablet"> Cours</span></a></li>
                 <li><a href="{{ path('Objet.show')}}"><span class="hidden-tablet"> Vente</span></a></li>
