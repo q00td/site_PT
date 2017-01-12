@@ -1,0 +1,130 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+
+    <body id="bg">
+    <!-- start: Content -->
+
+<div class="row-fluid">
+    <div id="content">
+    <div id="bloc" class="col-md-4">
+
+    <form method="post" action="{{ path("user.validFormAdd") }} ">
+        <div class="row-fluid">
+            <fieldset>
+                <legend>Inscription </legend>
+                <label>Nom :
+                    <input name="nom_user"  type="text"  size="18" value="{{donnees.nom_user|default("")}}" />
+                    {% if erreurs.nom_user is defined %}
+                        <small class="error">{{erreurs.nom_user}}</small>
+                    {% endif %}
+                </label>
+
+                <label>Prénom :
+                    <input name="prenom_user"  type="text"  size="18" value="{{donnees.prenom_user|default("")}}" />
+                    {% if erreurs.prenom_user is defined %}
+                        <small class="error">{{erreurs.prenom_user}}</small>
+                    {% endif %}
+                </label>
+
+                <label>Login :
+                    <input name="login"  type="text"  size="18" value="{{donnees.login|default("")}}" />
+                    {% if erreurs.login is defined %}
+                        <small class="error">{{erreurs.login}}</small>
+                    {% endif %}
+                </label>
+
+                <label>N° INE :
+                    <input name="N_INE"  type="text"  size="18" value="{{donnees.N_INE|default("")}}" />
+                    {% if erreurs.N_INE is defined %}
+                        <small class="error">{{erreurs.N_INE}}</small>
+                    {% endif %}
+                </label>
+
+                <label>Adresse mail :
+                    <input name="e_mail"  type="text"  size="18" value="{{donnees.e_mail|default("")}}" />
+                    {% if erreurs.e_mail is defined %}
+                        <small class="error">{{erreurs.e_mail}}</small>
+                    {% endif %}
+                </label>
+
+                <label>Adresse mail :
+                    <input name="password"  type="text"  size="18" value="{{donnees.password|default("")}}" />
+                    {% if erreurs.password is defined %}
+                        <small class="error">{{erreurs.password}}</small>
+                    {% endif %}
+                </label>
+
+                <label>Date de naissance :
+                    <input name="date_naissance"  type="text"  size="18" value="{{donnees.date_naissance|default("")}}" />
+                    {% if erreurs.date_naissance is defined %}
+                        <small class="error">{{erreurs.date_naissance}}</small>
+                    {% endif %}
+                </label>
+
+                <label>filiere:
+                    <input name="filiere"  type="text"  size="18" value="{{donnees.filiere|default("")}}" />
+                    {% if erreurs.filiere is defined %}
+                        <small class="error">{{erreurs.filiere}}</small>
+                    {% endif %}
+                </label>
+
+
+                <label>Type :
+                    <select name="id_type_user">
+                        {% if  donnees.id_type_user is not defined or donnees.id_type_user is empty   %}
+                            <option value="">Veuillez sélectionner votre type</option>
+                        {% endif %}
+                        {% for typeUser in typeUser %}
+                            <option value="{{ typeUser.id_type_user }}"
+                                    {% if donnees.id_type_user is defined and typeUser.id_type_user == donnees.id_type_user %}selected{% endif %}>
+                                {{ typeUser.libelle_type_user }}
+                            </option>
+                        {% endfor %}
+                        </select>
+                        {% if erreurs.id_type_user is defined %}
+                            <small class="error">{{erreurs.id_type_user}}</small>
+                        {% endif %}
+                </label>
+
+                <label>Sexe :
+                    <select name="id_sexe">
+                        {% if  donnees.id_sexe is not defined or donnees.id_sexe is empty   %}
+                            <option value="">Veuillez sélectionner votre type</option>
+                        {% endif %}
+                        {% for genreUser in genreUser %}
+                            <option value="{{ genreUser.id_sexe }}"
+                                    {% if donnees.id_sexe is defined and genreUser.id_sexe == donnees.id_sexe %}selected{% endif %}>
+                                {{ genreUser.libelle_sexe }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    {% if erreurs.id_sexe is defined %}
+                        <small class="error">{{erreurs.id_sexe}}</small>
+                    {% endif %}
+                </label>
+                {#<label>Type :#}
+                    {#<select name="id_categorie">#}
+                        {#{% if  donnees.id_categorie is not defined or donnees.id_categorie is empty   %}#}
+                            {#<option value="">Veuillez sélectionner la categorie de la voiture</option>#}
+                        {#{% endif %}#}
+                        {#{% for typeVoitures in typeVoitures %}#}
+                            {#<option value="{{ typeVoitures.id_categorie }}"#}
+                                    {#{% if donnees.id_categorie is defined and typeVoitures.id_categorie == donnees.id_categorie %}selected{% endif %}>#}
+                                {#{{ typeVoitures.libelle }}#}
+                            {#</option>#}
+                        {#{% endfor %}#}
+                    {#</select>#}
+                    {#{% if erreurs.id_categorie is defined %}#}
+                        {#<small class="error">{{erreurs.id_categorie}}</small>#}
+                    {#{% endif %}#}
+                {#</label>#}
+
+                <input type="submit" name="creerVoiture" value="créer" />
+            </fieldset>
+        </div>
+
+    </form>
+    </div>
+    </form>
+</div>
+{% endblock %}
