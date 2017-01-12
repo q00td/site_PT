@@ -46,6 +46,22 @@ background: #949494;
     -o-transition: border .2s ease-in-out;
     transition: border .2s ease-in-out;
 }
+#News3{
+    height: 50px;
+    display: block;
+    padding: 4px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    line-height: 1.42857143;
+    border: 3px solid lightgray;
+    text-align: center;
+    background-color: lightgray;
+    color: black;
+
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
 .thumbnail2 {
     height: 200px;
     display: block;

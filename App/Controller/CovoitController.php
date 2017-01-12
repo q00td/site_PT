@@ -20,7 +20,14 @@ class CovoitController implements ControllerProviderInterface
     public function show(Application $app) {
         $this->CovoitModel = new CovoitModel($app);
         $Covoit = $this->CovoitModel->getAllCovoit();
-        return $app["twig"]->render('backOff/Covoit/homepage.html.twig',['data'=>$Covoit]);
+        return $app["twig"]->render('backOff/Covoit/Covoit.html.twig',['data'=>$Covoit]);
+    }
+    public function plan(Application $app) {
+
+        $depart=$_POST['depart'];
+        $arrive=$_POST['arrive'];
+
+        return $app["twig"]->render('backOff/Covoit/trajet.html.twig',['depart'=>$depart,'arrive'=>$arrive]);
     }
     public function add(Application $app) {
         if(isset($app["session"])&&$app ["session"]->get("droit")!="DROITadmin"){
@@ -80,9 +87,9 @@ class CovoitController implements ControllerProviderInterface
             return "Vous n'avez pas les droits";
         }
         $id=$app->escape($req->get('id_Covoit'));
-        if (is_numeric($id_Covoit)) {
+        if (is_numeric($id)) {
             $this->CovoitModel = new CovoitModel($app);
-            $this->CovoitModel->deleteCovoit($id_Covoit);
+            $this->CovoitModel->deleteCovoit($id);
             return $app->redirect($app["url_generator"]->generate("Covoit.index"));
         }
         else
@@ -118,17 +125,17 @@ class CovoitController implements ControllerProviderInterface
             if(! is_numeric($donnees['prix_covoiturage'])) $erreurs['prix_covoiturage']='Doit être composé de 1 chiffre minimum';
             $contraintes = new Assert\Collection(
                 [
-                    'id_Covoiturage' => [new Assert\NotBlank(),new Assert\('digit')],
+                    'id_Covoiturage' => [new Assert\NotBlank(),new Assert\assert('digit')],
                     'depart' => [
                         new Assert\NotBlank(['message'=>'Entrer le nom du point de depart']),
                         new Assert\Length(['min'=>2, 'minMessage'=>"Le nom doit faire au moins {{ limit }} caractères."])
                     ],
-                    'id_covoiturage' => [new Assert\NotBlank(),new Assert\('digit')],
+                    'id_covoiturage' => [new Assert\NotBlank(),new Assert\assert('digit')],
                     'arrive' => [
                         new Assert\NotBlank(['message'=>'Entrer le nom de la destination']),
                         new Assert\Length(['min'=>10, 'minMessage'=>"La description doit faire au moins {{ limit }} caractères."])
                     ],
-                    'prix_covoiturage' => new Assert\(array(
+                    'prix_covoiturage' => new Assert\assert(array(
                         ''    => 'numeric',
                         'message' => 'La valeur {{ value }} n\'est pas valide.',
                     ))
@@ -165,6 +172,9 @@ class CovoitController implements ControllerProviderInterface
         $controllers->get('/show', 'App\Controller\CovoitController::show')->bind('Covoit.show');
         $controllers->get('/add', 'App\Controller\CovoitController::add')->bind('Covoit.add');
         $controllers->post('/add', 'App\Controller\CovoitController::validFormAdd')->bind('Covoit.validFormAdd');
+        $controllers->get('/plan', 'App\Controller\CovoitController::plan')->bind('Covoit.plan');
+        $controllers->post('/plan', 'App\Controller\CovoitController::plan')->bind('Covoit.plan');
+
         $controllers->get('/delete/{id}', 'App\Controller\CovoitController::delete')->bind('Covoit.delete')->assert('id', '\d+');;
         $controllers->delete('/delete', 'App\Controller\CovoitController::validFormDelete')->bind('Covoit.validFormDelete');
         $controllers->get('/edit/{id}', 'App\Controller\CovoitController::edit')->bind('Covoit.edit')->assert('id', '\d+');;

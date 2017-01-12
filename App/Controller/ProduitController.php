@@ -30,6 +30,9 @@ class ProduitController implements ControllerProviderInterface
     public function index(Application $app) {
         return $this->show($app);
     }
+    public function test(Application $app){
+        return $app["twig"]->render('backOff/Covoit/trajet.html.twig');
+    }
 
     public function show(Application $app) {
         $this->ObjetModel = new ObjetModel($app);
@@ -49,6 +52,8 @@ class ProduitController implements ControllerProviderInterface
 
         $controllers->get('/', 'App\Controller\produitController::index')->bind('produit.index');
         $controllers->get('/show', 'App\Controller\produitController::show')->bind('produit.show');
+        $controllers->get('/test', 'App\Controller\produitController::test')->bind('produit.test');
+
 
 
         return $controllers;

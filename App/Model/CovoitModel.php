@@ -12,9 +12,8 @@ class CovoitModel {
     {
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
-            ->select('c.id_Covoiturage', 'c.depart', 'c.arrive', 'c.id_user', 'c.prix_covoiturage', 'c.date_covoiturage')
-            ->from('Covoit', 'c')
-            ->addOrderBy('c.depart', ',c.date', 'ASC');
+            ->select('*')
+            ->from('Covoiturage', 'c');
         return $queryBuilder->execute()->fetchAll();
     }
     public function insertCovoit($donnees) {

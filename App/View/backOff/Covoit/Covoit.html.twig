@@ -1,0 +1,72 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+    <body id="bg">
+    <!-- start: Content -->
+
+    <div class="row-fluid">
+
+        <div id="content">
+            <div id="Events" class="col-md-12">
+                <div class="col-md-4">
+                    <a href="{{ path('Objet.pShow') }}" id="Events"><h4 class="text-blanc">Vos Covoit</h4></a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{{ path('Objet.add') }}" id="Events"><h4 class="text-blanc">Ajouter un Covoiturage</h4></a>
+                </div>
+                <div class="col-md-4">
+                    <form method="post" action="{{ path('Objet.search')  }}" >
+                        <input name="text" type="text" value="Chercher un Covoiturage">
+                        <input type="submit" value="Valider" />
+                    </form>
+                </div>
+
+
+            </div>
+            {#<div id="sidenavbar" class="col-md-3">#}
+            {#<div class="nav-collapse sidebar-nav">#}
+            {#<ul class="nav nav-tabs nav-stacked main-menu">#}
+            {#<li><a href="{{ path('produit.show')}}"><span class="hidden-tablet"> Acceuil</span></a></li>#}
+            {#<li><a href="index.html.twig">Message</a></li>#}
+            {#<li><a href="{{ path('Objet.show')}}">Objets</a></li>#}
+            {#<li><a href="index.html.twig">Prof</a></li>#}
+
+            {#</ul>#}
+            {#</div>#}
+
+            {#</div>#}
+
+            {% for covoit in data if data is not empty %}
+            <div id="News3" class="col-md-12">
+
+            <div class="col-md-1">
+
+                    {{ covoit.id_covoiturage }}
+                    </div>
+                    <div class="col-md-2">
+                      Depart :  {{ covoit.depart }}
+                    </div>
+                    <div class="col-md-2">
+                      Arrivé :  {{ covoit.arrive }}
+                    </div>
+                <div class="col-md-2">
+                     Prix/Place :{{ covoit.prix_covoiturage }}
+                </div>
+                <div class="col-md-2">
+                     Date :{{ covoit.date_covoiturage }}
+                </div>
+                <div class="col-md-2">
+<form method="post" action="{{ path('Covoit.plan') }}">
+    <input type="hidden" name="depart" value="{{ covoit.depart }}">
+    <input type="hidden" name="arrive" value="{{ covoit.arrive }}">
+
+    <input type="submit" value="Plan"></form>
+                </div>
+
+                </li>
+                {% endfor %}
+        </div>
+    </div>
+    </body>
+
+{% endblock %}
+

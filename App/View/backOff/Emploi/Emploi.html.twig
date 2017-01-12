@@ -35,7 +35,7 @@
 
             {#</div>#}
             {% for Emploi in data if data is not empty %}
-                <div id="emploi" class="col-md-4">
+                <div id="emploi" class="col-md-12">
                     <div class="thumbnail2">
                             <div class="col-md-6">
                                 <h4>{{ Emploi.poste_emploi }}</h4>
@@ -53,31 +53,32 @@
                             <div class="col-md-12">
                                 <h6>{{ Emploi.description_emploi }}</h6>
                             </div>
-
-                        {% if   app.session.get('id_type_user') is defined and  app.session.get('id_type_user') == 1 %}
-                            <div class="col-md-4">
-
-                                <form action="{{ path('Emploi.edit', {id: Emploi.id_emploi}) }}" >
-                                    <input type="submit" value="Modifier" /></form>
-                            </div>
-
-
-                            <div class="col-md-4">
-
-                            <form action="{{ path('Emploi.delete', {id: Emploi.id_emploi}) }}" >
-                                        <input type="submit" value="Supprimer" /></form>
-                            </div>
-                            <div class="col-md-4">
-                                {% endif %}
+                        <div class="col-md-1">
 
 
 
 
                             <form action="{{ path('Emploi.getUser' , {id: Emploi.id_emploi})}}" >
                                 <input type="hidden" name="id" value="{{ Emploi.id_emploi }}">
-                                        <input type="submit" value="contacter" />
-                                    </form>
+                                <input type="submit" value="contacter" />
+                            </form>
+                        </div>
+
+                        {% if   app.session.get('id_type_user') is defined and  app.session.get('id_type_user') == 1 %}
+                            <div class="col-md-1">
+
+                                <form action="{{ path('Emploi.edit', {id: Emploi.id_emploi}) }}" >
+                                    <input type="submit" value="Modifier" /></form>
                             </div>
+
+
+                            <div class="col-md-1">
+
+                            <form action="{{ path('Emploi.delete', {id: Emploi.id_emploi}) }}" >
+                                        <input type="submit" value="Supprimer" /></form>
+                            </div>
+                        {% endif %}
+
 
                             </div>
 
