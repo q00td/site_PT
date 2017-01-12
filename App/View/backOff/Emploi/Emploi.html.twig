@@ -53,13 +53,15 @@
                             <div class="col-md-12">
                                 <h6>{{ Emploi.description_emploi }}</h6>
                             </div>
+
+                        {% if   app.session.get('user_id') is defined and  app.session.get('user_id') == 1 %}
                             <div class="col-md-4">
 
                                 <form action="{{ path('Emploi.edit', {id: Emploi.id_emploi}) }}" >
                                     <input type="submit" value="Modifier" /></form>
                             </div>
 
-                        {% if   app.session.get('user_id') is defined and  app.session.get('user_id') == 1 %}
+
                             <div class="col-md-4">
 
                             <form action="{{ path('Emploi.delete', {id: Emploi.id_emploi}) }}" >
