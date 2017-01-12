@@ -104,4 +104,16 @@ class EmploiModel
         echo  $queryBuilder;
         return $queryBuilder->execute();
     }
+
+    public function  searchEmploi($text)
+    {
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('e.id_emploi','e.poste_emploi','e.date_debut_emploi','e.date_fin_emploi','e.description_emploi','e.type_emploi')
+            ->from('Emploi', 'e')
+            ->where('poste_emploi LIKE :word')
+            ->setParameter('word', '%' . $text . '%')
+            ->addOrderBy('e.poste_emploi','ASC');
+        return $queryBuilder->execute()->fetchAll();
+    }
 }

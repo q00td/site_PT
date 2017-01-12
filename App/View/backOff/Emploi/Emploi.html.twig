@@ -14,7 +14,7 @@
                     <a href="{{ path('Emploi.add') }}" id="Events"><h4 class="text-blanc">En créer un</h4></a>
                 </div>
                 <div class="col-md-4">
-                    <form action="{#{{ path('Emploi.search') }}#}" >
+                    <form method="post" action="{{ path('Emploi.search') }}" >
                         <input name="text" type="text" value="Chercher un emploi">
                         <input type="submit" value="Valider" />
                     </form>
