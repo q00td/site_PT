@@ -1,50 +1,50 @@
 {% extends "layout.html.twig" %}
 {% block contenu %}
-<body id="bg">
-<!-- start: Content -->
+    <body id="bg">
+    <!-- start: Content -->
 
 <div class="row-fluid">
 
     <div id="content">
 
-            <div class="row-fluid">
-                <fieldset>
-                    <div class="form-group">
+        <div class="row-fluid">
+            <fieldset>
+                <div class="form-group">
 
-                        {% for user in user if user is not empty %}
+                    {% for user in user if user is not empty %}
 
-                        <div id="bloc" class="col-md-4">
+                    <div id="bloc" class="col-md-4">
 
-                                <div class="col-md-12">
+                        <div class="col-md-12">
 
-                                <label>Nom :
-                                    {{ user.nom_user }}
+                            <label>Nom :
+                                {{ user.nom_user }}
 
-                                </label>
+                            </label>
 
-                                </div>
+                        </div>
 
-                            <div class="col-md-12">
+                        <div class="col-md-12">
 
-                                <label>Prénom :
-                                    {{ user.prenom_user }}
+                            <label>Prénom :
+                                {{ user.prenom_user }}
 
-                                </label>
+                            </label>
 
-                            </div>
-                            <div class="col-md-12">
+                        </div>
+                        <div class="col-md-12">
 
-                                <label>E_mail :
-                                    {{ user.e_mail }}
+                            <label>E_mail :
+                                {{ user.e_mail }}
 
-                                </label>
+                            </label>
 
-                            </div>
-                            </div>
+                        </div>
                     </div>
-                            {% endfor %}
-                </fieldset>
-            </div>
+                </div>
+                {% endfor %}
+            </fieldset>
+        </div>
         </form>
     </div>
 {% endblock %}
