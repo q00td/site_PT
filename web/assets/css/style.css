@@ -32,8 +32,10 @@ background: #949494;
     margin-bottom: 10px;
     margin-top: 10px;
     line-height: 1.42857143;
-    border: 3px solid grey;
-
+    border: 3px solid lightgray;
+    text-align: center;
+    font-family:"CaviarDreams_Bold.ttf";
+    font-size: 90px;
     -webkit-transition: border .2s ease-in-out;
     -o-transition: border .2s ease-in-out;
     transition: border .2s ease-in-out;
