@@ -32,6 +32,7 @@ class EmploiModel
             ->addOrderBy('id_emploi','DESC');
         return $queryBuilder->execute()->fetch();
     }
+    //
 
     public function getUser($id)
     {
