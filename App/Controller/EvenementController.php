@@ -152,8 +152,10 @@ class EvenementController implements ControllerProviderInterface
     }
 
     public function search(Application $app) {
+//        var_dump($_POST['text']);
+        $user=$_POST['text'];
         $this->EvenementModel = new EvenementModel($app);
-        $Evenements = $this->EvenementModel->searchEvenements();
+        $Evenements = $this->EvenementModel->searchEvenements($user);
         var_dump($Evenements);
         return $app["twig"]->render('backOff/Evenement/homepage.html.twig',['data'=>$Evenements]);
     }
@@ -165,7 +167,8 @@ class EvenementController implements ControllerProviderInterface
         $controllers->get('/', 'App\Controller\EvenementController::index')->bind('Evenement.index');
         $controllers->get('/show', 'App\Controller\EvenementController::show')->bind('Evenement.show');
 
-        $controllers->get('/show', 'App\Controller\EvenementController::search')->bind('Evenement.search');
+        $controllers->get('/search', 'App\Controller\EvenementController::search')->bind('Evenement.search');
+        $controllers->post('/search', 'App\Controller\EvenementController::search')->bind('Evenement.search');
 
         $controllers->get('/add', 'App\Controller\EvenementController::add')->bind('Evenement.add');
         $controllers->post('/add', 'App\Controller\EvenementController::validFormAdd')->bind('Evenement.validFormAdd');

@@ -134,9 +134,10 @@ class EmploiController implements ControllerProviderInterface
     }
 
     public function search(Application $app) {
+        $user=$_POST['text'];
         $this->EmploiModel = new EmploiModel($app);
-        $Emplois = $this->EmploiModel->searchEmplois();
-        var_dump($Emplois);
+        $Emplois = $this->EmploiModel->searchEmplois($user);
+        //var_dump($Emplois);
         return $app["twig"]->render('backOff/Emploi/Emploi.html.twig',['data'=>$Emplois]);
     }
 
@@ -147,6 +148,8 @@ class EmploiController implements ControllerProviderInterface
         $controllers->get('/', 'App\Controller\EmploiController::index')->bind('Emploi.index');
         $controllers->get('/show', 'App\Controller\EmploiController::show')->bind('Emploi.show');
 
+        $controllers->get('/search', 'App\Controller\EmploiController::search')->bind('Emploi.search');
+        $controllers->post('/search', 'App\Controller\EmploiController::search')->bind('Emploi.search');
 
         $controllers->get('/add', 'App\Controller\EmploiController::add')->bind('Emploi.add');
         $controllers->post('/add', 'App\Controller\EmploiController::validFormAdd')->bind('Emploi.validFormAdd');
