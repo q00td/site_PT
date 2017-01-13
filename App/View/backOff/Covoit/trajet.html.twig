@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script type="text/javascript">
 
-        window.onload = calcRoute;
-    </script>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Directions service</title>
@@ -38,7 +35,6 @@
 <div id="floating-panel">
     <b>Start: </b>
     <select id="start" onchange="calcRoute();">
-        <option value="{{ depart }}">{{ depart }}</option>
 
         <option value="{{ depart }}">{{ depart }}</option>
 
@@ -70,6 +66,17 @@
         };
         document.getElementById('start').addEventListener('change', onChangeHandler);
         document.getElementById('end').addEventListener('change', onChangeHandler);
+        directionsService.route({
+            origin: document.getElementById('start').value,
+            destination: document.getElementById('end').value,
+            travelMode: google.maps.TravelMode.DRIVING
+        }, function(response, status) {
+            if (status === google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
     }
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay) {

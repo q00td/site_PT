@@ -38,7 +38,6 @@ class EmploiController implements ControllerProviderInterface
     public function getUser(Application $app,$id) {
         $this->EmploiModel = new EmploiModel($app);
         $Objets = $this->EmploiModel->getUser($id);
-        //var_dump($Objets);
         return $app["twig"]->render('backOff/Emploi/user.html.twig',['user'=>$Objets]);
     }
 

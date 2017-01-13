@@ -1,0 +1,78 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+<body id="bg">
+<!-- start: Content -->
+
+<div class="row-fluid">
+
+    <div id="content">
+
+        <form method="post" action="{{ path('Covoit.validFormAdd') }}">
+
+            <div class="row-fluid">
+                <fieldset>
+                    <div class="form-group">
+
+
+                        <legend>Creer un Covoiturage</legend>
+                        <div id="bloc" class="col-md-4">
+
+                                <div class="col-md-12">
+
+                                <label>Depart :
+
+                                <input name="depart"  type="text"  size="18" value="{{donnees.nom_objet|default('')}}" />
+                                {% if erreurs.nom_objet is defined %}
+                                    <small class="error">{{erreurs.nom_objet}}</small>
+                                {% endif %}
+                                </label>
+
+                                </div>
+
+                        <div class="col-md-12">
+
+
+                        <div class="form-group">
+                        <label>Arrive
+                            <input name="arrive"  type="text"  size="18" 	value="{{donnees.description_objet|default('')}}"/>
+                            {% if erreurs.description_objet is defined %}
+                                <small class="error">{{erreurs.description_objet}}</small>
+                            {% endif %}
+                        </label>
+                    </div>
+                        </div>
+                            <div class="col-md-12">
+
+                            <div class="form-group">
+                        <label>Prix
+                            <input name="prix"  type="text"  size="18" 	value="{{donnees.prix_objet|default('')}}"/>
+                            {% if erreurs.prix_objet is defined %}
+                                <small class="error">{{erreurs.prix_objet}}</small>
+                            {% endif %}
+                        </label>
+                    </div>
+                            </div>
+                            <div class="col-md-12">
+
+
+                            <div class="form-group">
+                        <label>Date
+                            <input name="date"  type="text"  size="18" value="{{donnees.lieu_objet|default('')}}"/>
+                            {% if erreurs.lieu_objet is defined %}
+                                <small class="error">{{erreurs.lieu_objet}}</small>
+                            {% endif %}
+                        </label>
+                    </div>
+                            </div>
+                            <div class="col-md-12">
+
+                    <div class="form-group">
+                        <input type="submit" name="creerObjet" value="créer" />
+                    </div>
+                            </div>
+                        </div>
+                </fieldset>
+            </div>
+        </form>
+    </div>
+{% endblock %}

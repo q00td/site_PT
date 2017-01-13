@@ -1,0 +1,32 @@
+{% extends "layout.html.twig" %}
+
+{% block contenu %}
+
+    <body id="bg">
+    <!-- start: Content -->
+
+<div class="row-fluid">
+
+    <div id="content">
+    <form method="post" action="{{ path('Covoit.validFormDelete') }}">
+        <div class="row-fluid">
+            <div id="bloc" class="col-md-12">
+    {% for data in data if data is not empty %}
+        <fieldset>
+                <input name="id"  type="hidden" value="{{ data.id_covoiturage }}"/>
+
+                <label>Etes-vous sur de vouloir supprimer l'annonce d'identifiant {{ data.id_covoiturage }} ?
+                </label>
+
+                <input type="hidden" id="_method" name="_method" value="DELETE" />
+                <input type="submit" name="Supprimer" value="Supprimer" />
+
+            </fieldset>
+        {% endfor %}
+            </div>
+        </div>
+    </form>
+    </div>
+    </form>
+</div>
+{% endblock %}

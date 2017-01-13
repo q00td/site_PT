@@ -30,31 +30,26 @@ class CovoitController implements ControllerProviderInterface
         return $app["twig"]->render('backOff/Covoit/trajet.html.twig',['depart'=>$depart,'arrive'=>$arrive]);
     }
     public function add(Application $app) {
-        if(isset($app["session"])&&$app ["session"]->get("droit")!="DROITadmin"){
-            return "Vous n'avez pas les droits";
-        }
+
         $this->CovoitModel = new CovoitModel($app);
         $Covoit = $this->CovoitModel->getAllCovoit();
         return $app["twig"]->render('backOff/Covoit/add.html.twig',['Covoit'=>$Covoit,'path'=>BASE_URL]);
         return "add Covoit";
     }
     public function validFormAdd(Application $app, Request $req) {
-        if(isset($app["session"])&&$app ["session"]->get("droit")!="DROITadmin"){
-            return "Vous n'avez pas les droits";
-        }
+
         // var_dump($app['request']->attributes);
-        if (isset($_POST['id_covoiturage']) && isset($_POST['depart']) && isset($_POST['arrive']) and isset($app["session"]) and isset($_POST['prix_covoiturage']) and isset($_POST['date_covoiturage'])) {
+        if (isset($_POST['depart']) && isset($_POST['arrive']) and isset($app["session"]) and isset($_POST['prix']) and isset($_POST['date'])) {
             $donnees = [
-                'id_covoiturage' => htmlspecialchars($_POST['id_covoiturage']),// echapper les entrées
-                'depart' => htmlspecialchars($req->get('depart')),
-                'arrive' => htmlspecialchars($req->get('arrive')),
-                'prix_covoiturage' => htmlspecialchars($req->get('prix_covoiturage')),
-                'date_covoiturage' => htmlspecialchars($req->get('date_covoiturage')),
-                'id_user' => $app ["session"]->get("id_user")
+                'id' =>$app ["session"]->get("user_id") ,// echapper les entrées
+                'depart' => htmlspecialchars($_POST['depart']),
+                'arrive' => htmlspecialchars($_POST['arrive']),
+                'prix' => htmlspecialchars($_POST['prix']),
+                'date' => htmlspecialchars($_POST['date'])
             ];
             if(! preg_match("/^[A-Za-z ]{2,}/",$donnees['depart'])) $erreurs['depart']='Doit être composé de 2 lettres minimum';
             if(! preg_match("/^[A-Za-z ]{2,}/",$donnees['arrive'])) $erreurs['arrive']='Doit être composé de 2 lettres minimum';
-            if(! is_numeric($donnees['prix_covoiturage'])) $erreurs['prix_covoiturage']='Doit être composé de 1 chiffre minimum';
+            if(! is_numeric($donnees['prix'])) $erreurs['prix']='Doit être composé de 1 chiffre minimum';
             if(! empty($erreurs))
             {
                 $this->CovoitModel = new CovoitModel($app);
@@ -72,21 +67,15 @@ class CovoitController implements ControllerProviderInterface
             return $app->abort(404, 'error Pb data form Add');
     }
     public function delete(Application $app, $id) {
-        if(isset($app["session"])&&$app ["session"]->get("droit")!="DROITadmin"){
-            return "Vous n'avez pas les droits";
-        }
-        $this->CovoitModel = new CovoitModel($app);
-        $Covoit = $this->CovoitModel->getAllCovoit();
+
         $this->CovoitModel = new CovoitModel($app);
         $donnees = $this->CovoitModel->getCovoit($id);
-        return $app["twig"]->render('backOff/Covoit/delete.html.twig',['Covoit'=>$Covoit,'donnees'=>$donnees]);
+        return $app["twig"]->render('backOff/Covoit/v_form_delete_covoit.html.twig',['data'=>$donnees]);
         return "add Covoit";
     }
     public function validFormDelete(Application $app, Request $req) {
-        if(isset($app["session"])&&$app ["session"]->get("droit")!="DROITadmin"){
-            return "Vous n'avez pas les droits";
-        }
-        $id=$app->escape($req->get('id_Covoit'));
+
+        $id=$_POST['id'];
         if (is_numeric($id)) {
             $this->CovoitModel = new CovoitModel($app);
             $this->CovoitModel->deleteCovoit($id);

@@ -6,12 +6,13 @@
     <div class="row-fluid">
 
         <div id="content">
+
             <div id="Events" class="col-md-12">
                 <div class="col-md-4">
                     <a href="{{ path('Objet.pShow') }}" id="Events"><h4 class="text-blanc">Vos Covoit</h4></a>
                 </div>
                 <div class="col-md-4">
-                    <a href="{{ path('Objet.add') }}" id="Events"><h4 class="text-blanc">Ajouter un Covoiturage</h4></a>
+                    <a href="{{ path('Covoit.add') }}" id="Events"><h4 class="text-blanc">Ajouter un Covoiturage</h4></a>
                 </div>
                 <div class="col-md-4">
                     <form method="post" action="{{ path('Objet.search')  }}" >
@@ -54,17 +55,27 @@
                 <div class="col-md-2">
                      Date :{{ covoit.date_covoiturage }}
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
 <form method="post" action="{{ path('Covoit.plan') }}">
     <input type="hidden" name="depart" value="{{ covoit.depart }}">
     <input type="hidden" name="arrive" value="{{ covoit.arrive }}">
 
     <input type="submit" value="Plan"></form>
                 </div>
+                <div class="col-md-1">
+                    {% if   (app.session.get('user_id') is defined and  app.session.get('user_id') == covoit.id_user) %}
 
+                        <form action="{{ path('Covoit.delete', {id: covoit.id_covoiturage}) }}">
+                            <input type="submit" value="X"></form>
+                    {% endif %}
+                </div>
+                </div>
                 </li>
                 {% endfor %}
         </div>
+    </div>
+    <div id="styleFooter">
+
     </div>
     </body>
 

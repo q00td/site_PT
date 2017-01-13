@@ -18,7 +18,7 @@ class CovoitModel {
     }
     public function insertCovoit($donnees) {
         $queryBuilder = new QueryBuilder($this->db);
-        $queryBuilder->insert('Covoit')
+        $queryBuilder->insert('Covoiturage')
             ->values([
                 'depart' => '?',
                 'arrive' => '?',
@@ -28,9 +28,9 @@ class CovoitModel {
             ])
             ->setParameter(0, $donnees['depart'])
             ->setParameter(1, $donnees['arrive'])
-            ->setParameter(2, $donnees['id_user'])
-            ->setParameter(3, $donnees['prix_covoiturage'])
-            ->setParameter(4, $donnees['date_covoiturage'])
+            ->setParameter(2, $donnees['id'])
+            ->setParameter(3, $donnees['prix'])
+            ->setParameter(4, $donnees['date'])
         ;
         return $queryBuilder->execute();
     }
@@ -38,10 +38,10 @@ class CovoitModel {
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
             ->select('id_covoiturage', 'depart', 'arrive', 'id_user', 'prix_covoiturage','date_covoiturage')
-            ->from('covoiturage')
+            ->from('Covoiturage')
             ->where('id_covoiturage= :id_covoiturage')
-            ->setParameter('id_covoiturage', $id_covoiturage);
-        return $queryBuilder->execute()->fetch();
+            ->setParameter('id_covoiturage', $id);
+        return $queryBuilder->execute()->fetchAll();
     }
     public function updateCovoit($donnees) {
         $queryBuilder = new QueryBuilder($this->db);
@@ -62,9 +62,9 @@ class CovoitModel {
     public function deleteCovoit($id) {
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
-            ->delete('covoiturage')
+            ->delete('Covoiturage')
             ->where('id_covoiturage = :id_covoiturage')
-            ->setParameter('id_covoiturage',(int)$id_covoiturage)
+            ->setParameter('id_covoiturage',$id)
         ;
         return $queryBuilder->execute();
     }

@@ -14,24 +14,15 @@
                     {% for user in user if user is not empty %}
 
                     <div id="bloc" class="col-md-4">
-
                         <div class="col-md-12">
 
-                            <label>Nom :
-                                {{ user.nom_user }}
+                            <label>Entreprise :
+                                {{ user.login }}
 
                             </label>
 
                         </div>
-
-                        <div class="col-md-12">
-
-                            <label>Prénom :
-                                {{ user.prenom_user }}
-
-                            </label>
-
-                        </div>
+                        
                         <div class="col-md-12">
 
                             <label>E_mail :
