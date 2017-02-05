@@ -80,13 +80,13 @@ class UserController implements ControllerProviderInterface {
 
     //*********************************************************************************************************************************************
     public function add(Application $app) {
-        $this->typeUserModel = new TypeUserModel($app);
-        $typeUser = $this->typeUserModel->getAllTypeUser();
+//        $this->typeUserModel = new TypeUserModel($app);
+//        $typeUser = $this->typeUserModel->getAllTypeUser();
 
         $this->genreModel = new GenreModel($app);
         $genre = $this->genreModel->getAllGenre();
 
-        return $app["twig"]->render('add_user.html.twig',['typeUser'=>$typeUser],['genreUser'=>$genre]);
+        return $app["twig"]->render('add_user.html.twig',['genreUser'=>$genre]);
     }
 
 
@@ -122,7 +122,52 @@ class UserController implements ControllerProviderInterface {
 //        }
 //        else
 //            return "error ????? PB data form";
-        return $app->redirect($app["url_generator"]->generate("user.signin"));
+
+        if (isset($_POST['login']) && isset($_POST['nom_user']) && isset($_POST['prenom_user'])
+            && isset($_POST['N_INE']) && isset($_POST['e_mail']) && isset($_POST['password'])
+            && isset($_POST['date_naissance'])
+            && isset($_POST['filiere']) && isset($_POST['id_type_user']) && isset($_POST['id_sexe']) ){
+            $donnees = [
+                'login' => htmlspecialchars($_POST['login']),
+                'nom_user' => htmlspecialchars($_POST['nom_user']),
+                'prenom_user' => htmlspecialchars($_POST['prenom_user']),
+                'N_INE' => htmlspecialchars($_POST['N_INE']),
+                'e_mail' => htmlspecialchars($_POST['e_mail']),
+                'password' => htmlspecialchars($_POST['password']),
+                'date_naissance' => htmlspecialchars($_POST['date_naissance']),
+                'filiere' => htmlspecialchars($_POST['filiere']),
+                'id_type_user' => htmlspecialchars($_POST['id_type_user']),
+                'id_sexe' => htmlspecialchars($_POST['id_sexe'])
+            ];
+
+
+        // Controle
+            if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['login']))) $erreurs['login']='login composé de 2 lettres minimum';
+            if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['nom_user']))) $erreurs['nom_user']='nom_user composé de 2 lettres minimum';
+            if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['prenom_user']))) $erreurs['prenom_user']='prenom_user composé de 2 lettres minimum';
+            if(! is_numeric($donnees['N_INE']))$erreurs['N_INE']='veuillez saisir une valeur';
+            if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['e_mail']))) $erreurs['e_mail']='e_mail composé de 2 lettres minimum';
+            if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['password']))) $erreurs['password']='password composé de 2 lettres minimum';
+            if ((! preg_match("/(\d{4})-(\d{2})-(\d{2})/",$donnees['date_naissance']))) $erreurs['date_naissance']='entrer une date valide format aaaa-mm-jj';
+            if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['filiere']))) $erreurs['filiere']='filiere composé de 2 lettres minimum';
+            if(! is_numeric($donnees['id_type_user']))$erreurs['id_type_user']='saisir une valeur numérique';
+            if(! is_numeric($donnees['id_sexe']))$erreurs['id_sexe']='saisir une valeur numérique';
+
+            if(! empty($erreurs)) {
+                $this->genreModel = new GenreModel($app);
+                $genre = $this->genreModel->getAllGenre();
+                return $app["twig"]->render('add_user.html.twig', ['donnees' => $donnees, 'erreurs' => $erreurs, 'genreUser' => $genre]);
+            }else{
+                $this->userModel = new UserModel($app);
+                $this->userModel->insertUser($donnees);
+                return $app->redirect($app["url_generator"]->generate("user.signin"));
+            }
+
+
+//            $this->userModel->insertUser($donnees);
+//            return $app->redirect($app["url_generator"]->generate("user.signin"));
+        } else
+            return "error ????? PB data form";
     }
 
 

@@ -52,4 +52,40 @@ class UserModel {
         return $queryBuilder->execute();
     }
 
+    public function insertUser($donnees) {
+        $queryBuilder = new QueryBuilder($this->db);
+        var_dump($donnees);
+        $queryBuilder->insert('User')
+            ->values([
+                'login' => '?',
+                'nom_user' => '?',
+                'prenom_user' => '?',
+                'N_INE' => '?',
+                'e_mail' => '?',
+                'password' => '?',
+                'date_naissance' => '?',
+                'id_type_user' => '?',
+                'id_sexe' => '?'
+            ])
+            ->setParameter(0, $donnees['login'])
+            ->setParameter(1, $donnees['nom_user'])
+            ->setParameter(2, $donnees['prenom_user'])
+            ->setParameter(3, $donnees['N_INE'])
+            ->setParameter(4, $donnees['e_mail'])
+            ->setParameter(5, $donnees['password'])
+            ->setParameter(6, $donnees['date_naissance'])
+            ->setParameter(7, $donnees['id_type_user'])
+            ->setParameter(8, $donnees['id_sexe'])
+        ;
+        return $queryBuilder->execute();
+    }
+
+    public  function getSexe(){
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('*')
+            ->from('Sexe')
+            ->addOrderBy('libelle_sexe','DESC');
+        return $queryBuilder->execute()->fetch();
+    }
 }
