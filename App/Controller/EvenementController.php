@@ -156,7 +156,6 @@ class EvenementController implements ControllerProviderInterface
         $user=$_POST['text'];
         $this->EvenementModel = new EvenementModel($app);
         $Evenements = $this->EvenementModel->searchEvenements($user);
-        var_dump($Evenements);
         return $app["twig"]->render('backOff/Evenement/homepage.html.twig',['data'=>$Evenements]);
     }
 
