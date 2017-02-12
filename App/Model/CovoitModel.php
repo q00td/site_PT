@@ -34,6 +34,16 @@ class CovoitModel {
         ;
         return $queryBuilder->execute();
     }
+    function getMail($id){
+        $queryBuilder = new QueryBuilder($this->db);
+        $queryBuilder
+            ->select('e_mail')
+            ->from('User', 'u')
+            ->innerJoin('u', 'Covoiturage', 'c', 'u.id_user=c.id_user')
+            ->where('c.id_user= :id_user')
+            ->setParameter('id_user', $id);
+        return $queryBuilder->execute()->fetch();
+    }
     function getCovoit($id) {
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder

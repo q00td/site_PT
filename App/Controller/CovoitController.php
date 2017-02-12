@@ -73,6 +73,44 @@ class CovoitController implements ControllerProviderInterface
         return $app["twig"]->render('backOff/Covoit/v_form_delete_covoit.html.twig',['data'=>$donnees]);
         return "add Covoit";
     }
+
+    public function mail(Application $app,$id) {
+
+
+        $this->CovoitModel = new CovoitModel($app);
+        $mail= $this->CovoitModel->getMail($id);
+        $mailFROM=$app ["session"]->get("e_mail");
+        var_dump($mail["e_mail"]);
+        var_dump($mailFROM);
+        $b=mail($mailFROM, 'Mon Sujet', 'Ceci est un test');
+        var_dump($b);
+
+        $destinataire = 'quentinoternaud@gmail.com';
+// Pour les champs $expediteur / $copie / $destinataire, séparer par une virgule s'il y a plusieurs adresses
+        $expediteur = 'quentinoternaud@gmail.com';
+        $copie = 'quentinoternaud@gmail.com';
+        $copie_cachee = 'quentinoternaud@gmail.com';
+        $objet = 'Test'; // Objet du message
+        $headers  = 'MIME-Version: 1.0' . "\n"; // Version MIME
+        $headers .= 'Reply-To: '.$expediteur."\n"; // Mail de reponse
+        $headers .= 'From: "Nom_de_expediteur"<'.$expediteur.'>'."\n"; // Expediteur
+        $headers .= 'Delivered-to: '.$destinataire."\n"; // Destinataire
+        $headers .= 'Cc: '.$copie."\n"; // Copie Cc
+        $headers .= 'Bcc: '.$copie_cachee."\n\n"; // Copie cachée Bcc
+        $message = 'Un Bonjour de Developpez.com!';
+        if (mail($destinataire, $objet, $message, $headers)) // Envoi du message
+        {
+            echo 'Votre message a bien été envoyé ';
+        }
+        else // Non envoyé
+        {
+            echo "Votre message n'a pas pu être envoyé";
+        }
+
+        $Covoit = $this->CovoitModel->getAllCovoit();
+        return $app["twig"]->render('backOff/Covoit/Covoit.html.twig',['data'=>$Covoit]);
+    }
+
     public function validFormDelete(Application $app, Request $req) {
 
         $id=$_POST['id'];
@@ -163,6 +201,9 @@ class CovoitController implements ControllerProviderInterface
         $controllers->post('/add', 'App\Controller\CovoitController::validFormAdd')->bind('Covoit.validFormAdd');
         $controllers->get('/plan', 'App\Controller\CovoitController::plan')->bind('Covoit.plan');
         $controllers->post('/plan', 'App\Controller\CovoitController::plan')->bind('Covoit.plan');
+
+        $controllers->get('/mail/{id}', 'App\Controller\CovoitController::mail')->bind('Covoit.mail')->assert('id', '\d+');;
+
 
         $controllers->get('/delete/{id}', 'App\Controller\CovoitController::delete')->bind('Covoit.delete')->assert('id', '\d+');;
         $controllers->delete('/delete', 'App\Controller\CovoitController::validFormDelete')->bind('Covoit.validFormDelete');

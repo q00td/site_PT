@@ -38,6 +38,7 @@ class UserController implements ControllerProviderInterface {
 			$app['session']->set('login', $data['login']);
 			$app['session']->set('logged', 1);
 			$app['session']->set('user_id',$data['id_user']);
+            $app['session']->set('e_mail',$data['e_mail']);
 			return $app->redirect($app["url_generator"]->generate("produit.index"));
 		}
 		else

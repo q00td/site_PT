@@ -68,6 +68,8 @@
                         <form action="{{ path('Covoit.delete', {id: covoit.id_covoiturage}) }}">
                             <input type="submit" value="X"></form>
                     {% endif %}
+                    <form action="{{ path('Covoit.mail', {id: covoit.id_covoiturage}) }}">
+                        <input type="submit" value="Réserver"></form>
                 </div>
                 </div>
                 </li>
