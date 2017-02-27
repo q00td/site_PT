@@ -1,0 +1,60 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+
+    <body id="bg">
+    <!-- start: Content -->
+
+<div class="row-fluid">
+    <div id="content">
+    <div id="bloc" class="col-md-4">
+
+    <form method="post" action="{{ path("user.validFormAddPro") }} ">
+        <div class="row-fluid">
+            <fieldset>
+                <legend>Inscription Professionnel</legend>
+                <label>Nom :
+                    <input name="nom_user"  type="text"  size="18" value="{{donnees.nom_user|default("")}}" />
+                    {% if erreurs.nom_user is defined %}
+                        <small class="error">{{erreurs.nom_user}}</small>
+                    {% endif %}
+                </label>
+
+
+                <label>Login :
+                    <input name="login"  type="text"  size="18" value="{{donnees.login|default("")}}" />
+                    {% if erreurs.login is defined %}
+                        <small class="error">{{erreurs.login}}</small>
+                    {% endif %}
+                </label>
+
+
+                <label>Adresse mail :
+                    <input name="e_mail"  type="text"  size="18" value="{{donnees.e_mail|default("")}}" />
+                    {% if erreurs.e_mail is defined %}
+                        <small class="error">{{erreurs.e_mail}}</small>
+                    {% endif %}
+                </label>
+
+                <label>Mot de passe :
+                    <input name="password"  type="text"  size="18" value="{{donnees.password|default("")}}" />
+                    {% if erreurs.password is defined %}
+                        <small class="error">{{erreurs.password}}</small>
+                    {% endif %}
+                </label>
+
+
+
+                <br>
+
+
+                <input type="submit" name="creerPro" value="créer" />
+            </fieldset>
+        </div>
+
+    </form>
+
+    <br/>
+    </div>
+    </form>
+</div>
+{% endblock %}

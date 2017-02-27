@@ -1,0 +1,46 @@
+{% extends "layout.html.twig" %}
+{% block contenu %}
+
+    <body id="bg">
+    <!-- start: Content -->
+
+<div class="row-fluid">
+    <div id="content">
+        <div id="bloc" class="col-md-4">
+
+            <form action="{{ path("user.createEleve") }} ">
+                <div class="row-fluid">
+                    <fieldset>
+
+                        <input type="submit" name="creerEtu" value="Etudiant" />
+                    </fieldset>
+                </div>
+
+
+            </form>
+
+            <form action="{{ path("user.createProf") }}">
+                <div class="row-fluid">
+                    <fieldset>
+
+                        <input type="submit" name="creerEtu" value="Professeur" />
+                    </fieldset>
+                </div>
+
+
+            </form>
+
+            <form action=" {{ path("user.createPro") }}">
+                <div class="row-fluid">
+                    <fieldset>
+
+                        <input type="submit" name="creerEtu" value="Professionnel" />
+                    </fieldset>
+                </div>
+
+
+            </form>
+        </div>
+        </form>
+    </div>
+{% endblock %}

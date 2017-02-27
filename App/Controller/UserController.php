@@ -79,10 +79,8 @@ class UserController implements ControllerProviderInterface {
 
 
 
-    //*********************************************************************************************************************************************
-    public function add(Application $app) {
-//        $this->typeUserModel = new TypeUserModel($app);
-//        $typeUser = $this->typeUserModel->getAllTypeUser();
+    //*********************************************************************  ELEVE  ************************************************************************
+    public function addEleve(Application $app) {
 
         $this->genreModel = new GenreModel($app);
         $genre = $this->genreModel->getAllGenre();
@@ -92,42 +90,13 @@ class UserController implements ControllerProviderInterface {
 
 
 
-    public function validFormAdd(Application $app) {
-//        if (isset($_POST['nom']) && isset($_POST['id_categorie']) and isset($_POST['nom']) and isset($_POST['puissance']) and isset($_POST['date_lancement'])) {
-//            $donnees = [
-//                'nom' => htmlspecialchars($_POST['nom']),
-//                'id_categorie' => htmlspecialchars($_POST['id_categorie']),
-//                'prix' => htmlspecialchars($_POST['prix']),
-//                'puissance' => htmlspecialchars($_POST['puissance']),
-//                'date_lancement' => htmlspecialchars($_POST['date_lancement'])
-//            ];
-//            if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['nom']))) $erreurs['nom']='nom composé de 2 lettres minimum';
-//            if(! is_numeric($donnees['id_categorie']))$erreurs['id_categorie']='veuillez saisir une valeur';
-//            if(! is_numeric($donnees['prix']))$erreurs['prix']='saisir une valeur numérique';
-//            if(! is_numeric($donnees['puissance']))$erreurs['puissance']='saisir une valeur numérique';
-//            if ((! preg_match("/(\d{4})-(\d{2})-(\d{2})/",$donnees['date_lancement']))) $erreurs['date_lancement']='entrer une date valide format aaaa-mm-jj';
-//
-//            if(! empty($erreurs))
-//            {
-//                $this->typeVoitureModel = new TypeVoitureModel($app);
-//                $typeVoitures = $this->typeVoitureModel->getAllTypeVoitures();
-//                return $app["twig"]->render('voiture/v_form_create_voiture.html.twig',['donnees'=>$donnees,'erreurs'=>$erreurs,'typeVoitures'=>$typeVoitures]);
-//            }
-//            else
-//            {
-//                $this->voitureModel = new voitureModel($app);
-//                $this->voitureModel->insertVoiture($donnees);
-//                return $app->redirect($app["url_generator"]->generate("voiture.index"));
-//            }
-//
-//        }
-//        else
-//            return "error ????? PB data form";
+    public function validFormAddEleve(Application $app) {
+
 
         if (isset($_POST['login']) && isset($_POST['nom_user']) && isset($_POST['prenom_user'])
             && isset($_POST['N_INE']) && isset($_POST['e_mail']) && isset($_POST['password'])
             && isset($_POST['date_naissance'])
-            && isset($_POST['filiere']) && isset($_POST['id_type_user']) && isset($_POST['id_sexe']) ){
+            && isset($_POST['filiere']) && isset($_POST['id_sexe']) ){
             $donnees = [
                 'login' => htmlspecialchars($_POST['login']),
                 'nom_user' => htmlspecialchars($_POST['nom_user']),
@@ -137,7 +106,6 @@ class UserController implements ControllerProviderInterface {
                 'password' => htmlspecialchars($_POST['password']),
                 'date_naissance' => htmlspecialchars($_POST['date_naissance']),
                 'filiere' => htmlspecialchars($_POST['filiere']),
-                'id_type_user' => htmlspecialchars($_POST['id_type_user']),
                 'id_sexe' => htmlspecialchars($_POST['id_sexe'])
             ];
 
@@ -151,7 +119,6 @@ class UserController implements ControllerProviderInterface {
             if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['password']))) $erreurs['password']='password composé de 2 lettres minimum';
             if ((! preg_match("/(\d{4})-(\d{2})-(\d{2})/",$donnees['date_naissance']))) $erreurs['date_naissance']='entrer une date valide format aaaa-mm-jj';
             if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['filiere']))) $erreurs['filiere']='filiere composé de 2 lettres minimum';
-            if(! is_numeric($donnees['id_type_user']))$erreurs['id_type_user']='saisir une valeur numérique';
             if(! is_numeric($donnees['id_sexe']))$erreurs['id_sexe']='saisir une valeur numérique';
 
             if(! empty($erreurs)) {
@@ -160,18 +127,112 @@ class UserController implements ControllerProviderInterface {
                 return $app["twig"]->render('add_user.html.twig', ['donnees' => $donnees, 'erreurs' => $erreurs, 'genreUser' => $genre]);
             }else{
                 $this->userModel = new UserModel($app);
-                $this->userModel->insertUser($donnees);
-                return $app->redirect($app["url_generator"]->generate("user.signin"));
+                $this->userModel->insertUserEleve($donnees);
+                return $app->redirect($app["url_generator"]->generate("user.choice"));
             }
 
-
-//            $this->userModel->insertUser($donnees);
-//            return $app->redirect($app["url_generator"]->generate("user.signin"));
         } else
             return "error ????? PB data form";
     }
 
 
+    //*********************************************************************  PROFESSEUR  ************************************************************************
+    public function addProf(Application $app) {
+
+        $this->genreModel = new GenreModel($app);
+        $genre = $this->genreModel->getAllGenre();
+
+        return $app["twig"]->render('add_prof.html.twig',['genreUser'=>$genre]);
+    }
+
+
+
+    public function validFormAddProf(Application $app) {
+
+
+        if (isset($_POST['login']) && isset($_POST['nom_user']) && isset($_POST['prenom_user'])
+            && isset($_POST['e_mail']) && isset($_POST['password'])
+            && isset($_POST['date_naissance'])
+            && isset($_POST['id_sexe']) ){
+            $donnees = [
+                'login' => htmlspecialchars($_POST['login']),
+                'nom_user' => htmlspecialchars($_POST['nom_user']),
+                'prenom_user' => htmlspecialchars($_POST['prenom_user']),
+                'e_mail' => htmlspecialchars($_POST['e_mail']),
+                'password' => htmlspecialchars($_POST['password']),
+                'date_naissance' => htmlspecialchars($_POST['date_naissance']),
+                'id_sexe' => htmlspecialchars($_POST['id_sexe'])
+            ];
+
+
+            // Controle
+            if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['login']))) $erreurs['login']='login composé de 2 lettres minimum';
+            if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['nom_user']))) $erreurs['nom_user']='nom_user composé de 2 lettres minimum';
+            if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['prenom_user']))) $erreurs['prenom_user']='prenom_user composé de 2 lettres minimum';
+            if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['e_mail']))) $erreurs['e_mail']='e_mail composé de 2 lettres minimum';
+            if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['password']))) $erreurs['password']='password composé de 2 lettres minimum';
+            if ((! preg_match("/(\d{4})-(\d{2})-(\d{2})/",$donnees['date_naissance']))) $erreurs['date_naissance']='entrer une date valide format aaaa-mm-jj';
+            if(! is_numeric($donnees['id_sexe']))$erreurs['id_sexe']='saisir une valeur numérique';
+
+            if(! empty($erreurs)) {
+                $this->genreModel = new GenreModel($app);
+                $genre = $this->genreModel->getAllGenre();
+                return $app["twig"]->render('add_prof.html.twig', ['donnees' => $donnees, 'erreurs' => $erreurs, 'genreUser' => $genre]);
+            }else{
+                $this->userModel = new UserModel($app);
+                $this->userModel->insertUserProf($donnees);
+                return $app->redirect($app["url_generator"]->generate("user.choice"));
+            }
+
+        } else
+            return "error ????? PB data form";
+    }
+
+//*********************************************************************  PROFESSIONNEL  ************************************************************************
+    public function addPro(Application $app) {
+
+        $this->genreModel = new GenreModel($app);
+        $genre = $this->genreModel->getAllGenre();
+
+        return $app["twig"]->render('add_pro.html.twig',['genreUser'=>$genre]);
+    }
+
+
+
+    public function validFormAddPro(Application $app) {
+
+
+        if (isset($_POST['login']) && isset($_POST['nom_user'])
+            && isset($_POST['e_mail']) && isset($_POST['password'])){
+            $donnees = [
+                'login' => htmlspecialchars($_POST['login']),
+                'nom_user' => htmlspecialchars($_POST['nom_user']),
+                'e_mail' => htmlspecialchars($_POST['e_mail']),
+                'password' => htmlspecialchars($_POST['password'])
+            ];
+
+
+            // Controle
+            if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['login']))) $erreurs['login']='login composé de 2 lettres minimum';
+            if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['nom_user']))) $erreurs['nom_user']='nom_user composé de 2 lettres minimum';
+            if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['e_mail']))) $erreurs['e_mail']='e_mail composé de 2 lettres minimum';
+            if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['password']))) $erreurs['password']='password composé de 2 lettres minimum';
+
+
+
+            if(! empty($erreurs)) {
+                $this->genreModel = new GenreModel($app);
+                $genre = $this->genreModel->getAllGenre();
+                return $app["twig"]->render('add_pro.html.twig', ['donnees' => $donnees, 'erreurs' => $erreurs, 'genreUser' => $genre]);
+            }else{
+                $this->userModel = new UserModel($app);
+                $this->userModel->insertUserPro($donnees);
+                return $app->redirect($app["url_generator"]->generate("user.choice"));
+            }
+
+        } else
+            return "error ????? PB data form";
+    }
 
 	public function deconnexionSession(Application $app)
 	{
@@ -181,7 +242,15 @@ class UserController implements ControllerProviderInterface {
 	}
 
 
+    public function choice(Application $app) {
+//        $this->typeUserModel = new TypeUserModel($app);
+//        $typeUser = $this->typeUserModel->getAllTypeUser();
 
+        $this->genreModel = new GenreModel($app);
+        $genre = $this->genreModel->getAllGenre();
+
+        return $app["twig"]->render('choix.html.twig',['genreUser'=>$genre]);
+    }
 
 	public function connect(Application $app) {
 		$controllers = $app['controllers_factory'];
@@ -189,8 +258,17 @@ class UserController implements ControllerProviderInterface {
 		$controllers->get('/login', 'App\Controller\UserController::connexionUser')->bind('user.login');
         $controllers->post('/login', 'App\Controller\UserController::validFormConnexionUser')->bind('user.validFormlogin');
 
-        $controllers->get('/signin', 'App\Controller\UserController::add')->bind('user.signin');
-        $controllers->post('/signin', 'App\Controller\UserController::validFormAdd')->bind('user.validFormAdd');
+        $controllers->get('/createEleve', 'App\Controller\UserController::addEleve')->bind('user.createEleve');
+        $controllers->post('/createEleve', 'App\Controller\UserController::validFormAddEleve')->bind('user.validFormAddEleve');
+
+        $controllers->get('/choice', 'App\Controller\UserController::choice')->bind('user.choice');
+
+        $controllers->get('/createProf', 'App\Controller\UserController::addProf')->bind('user.createProf');
+        $controllers->post('/createProf', 'App\Controller\UserController::validFormAddProf')->bind('user.validFormAddProf');
+
+        $controllers->get('/createPro', 'App\Controller\UserController::addPro')->bind('user.createPro');
+        $controllers->post('/createPro', 'App\Controller\UserController::validFormAddPro')->bind('user.validFormAddPro');
+
 
         $controllers->get('/logout', 'App\Controller\UserController::deconnexionSession')->bind('user.logout');
         $controllers->get('/editUser', 'App\Controller\UserController::editUser')->bind('user.editUser');

@@ -52,7 +52,7 @@ class UserModel {
         return $queryBuilder->execute();
     }
 
-    public function insertUser($donnees) {
+    public function insertUserEleve($donnees) {
         $queryBuilder = new QueryBuilder($this->db);
         var_dump($donnees);
         $queryBuilder->insert('User')
@@ -74,11 +74,59 @@ class UserModel {
             ->setParameter(4, $donnees['e_mail'])
             ->setParameter(5, $donnees['password'])
             ->setParameter(6, $donnees['date_naissance'])
-            ->setParameter(7, $donnees['id_type_user'])
+            ->setParameter(7, 2)
             ->setParameter(8, $donnees['id_sexe'])
         ;
         return $queryBuilder->execute();
     }
+
+    public function insertUserProf($donnees) {
+        $queryBuilder = new QueryBuilder($this->db);
+        var_dump($donnees);
+        $queryBuilder->insert('User')
+            ->values([
+                'login' => '?',
+                'nom_user' => '?',
+                'prenom_user' => '?',
+                'e_mail' => '?',
+                'password' => '?',
+                'date_naissance' => '?',
+                'id_type_user' => '?',
+                'id_sexe' => '?'
+            ])
+            ->setParameter(0, $donnees['login'])
+            ->setParameter(1, $donnees['nom_user'])
+            ->setParameter(2, $donnees['prenom_user'])
+            ->setParameter(3, $donnees['e_mail'])
+            ->setParameter(4, $donnees['password'])
+            ->setParameter(5, $donnees['date_naissance'])
+            ->setParameter(6, 3)
+            ->setParameter(7, $donnees['id_sexe'])
+        ;
+        return $queryBuilder->execute();
+    }
+
+
+    public function insertUserPro($donnees) {
+        $queryBuilder = new QueryBuilder($this->db);
+        var_dump($donnees);
+        $queryBuilder->insert('User')
+            ->values([
+                'login' => '?',
+                'nom_user' => '?',
+                'e_mail' => '?',
+                'password' => '?',
+                'id_type_user' => '?'
+            ])
+            ->setParameter(0, $donnees['login'])
+            ->setParameter(1, $donnees['nom_user'])
+            ->setParameter(2, $donnees['e_mail'])
+            ->setParameter(3, $donnees['password'])
+            ->setParameter(4, 4)
+        ;
+        return $queryBuilder->execute();
+    }
+
 
     public  function getSexe(){
         $queryBuilder = new QueryBuilder($this->db);
