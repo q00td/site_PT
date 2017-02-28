@@ -19,6 +19,13 @@
                     {% endif %}
                 </label>
 
+                <label>Adresse mail :
+                    <input name="e_mail"  type="text"  size="18" value="{{donnees.e_mail|default("")}}" />
+                    {% if erreurs.e_mail is defined %}
+                        <small class="error">{{erreurs.e_mail}}</small>
+                    {% endif %}
+                </label>
+
 
                 <label>Login :
                     <input name="login"  type="text"  size="18" value="{{donnees.login|default("")}}" />
@@ -28,15 +35,10 @@
                 </label>
 
 
-                <label>Adresse mail :
-                    <input name="e_mail"  type="text"  size="18" value="{{donnees.e_mail|default("")}}" />
-                    {% if erreurs.e_mail is defined %}
-                        <small class="error">{{erreurs.e_mail}}</small>
-                    {% endif %}
-                </label>
+
 
                 <label>Mot de passe :
-                    <input name="password"  type="text"  size="18" value="{{donnees.password|default("")}}" />
+                    <input name="password"  type="password"  size="18" value="{{donnees.password|default("")}}" />
                     {% if erreurs.password is defined %}
                         <small class="error">{{erreurs.password}}</small>
                     {% endif %}
@@ -49,9 +51,16 @@
 
                 <input type="submit" name="creerPro" value="créer" />
             </fieldset>
+
         </div>
 
+
     </form>
+        <form action="{{ path("user.choice") }}">
+            <input type="submit" name="retour" value="retour" />
+
+        </form>
+
 
     <br/>
     </div>

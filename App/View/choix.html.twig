@@ -6,6 +6,7 @@
 
 <div class="row-fluid">
     <div id="content">
+
         <div id="bloc" class="col-md-4">
 
             <form action="{{ path("user.createEleve") }} ">
@@ -38,6 +39,10 @@
                     </fieldset>
                 </div>
 
+
+            </form>
+            <form action="{{ path("user.login") }}">
+                <input type="submit" name="retour" value="retour" />
 
             </form>
         </div>

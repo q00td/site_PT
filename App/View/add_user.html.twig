@@ -26,12 +26,7 @@
                     {% endif %}
                 </label>
 
-                <label>Login :
-                    <input name="login"  type="text"  size="18" value="{{donnees.login|default("")}}" />
-                    {% if erreurs.login is defined %}
-                        <small class="error">{{erreurs.login}}</small>
-                    {% endif %}
-                </label>
+
 
                 <label>N° INE :
                     <input name="N_INE"  type="text"  size="18" value="{{donnees.N_INE|default("")}}" />
@@ -47,8 +42,15 @@
                     {% endif %}
                 </label>
 
+                <label>Login :
+                    <input name="login"  type="text"  size="18" value="{{donnees.login|default("")}}" />
+                    {% if erreurs.login is defined %}
+                        <small class="error">{{erreurs.login}}</small>
+                    {% endif %}
+                </label>
+
                 <label>Mot de passe :
-                    <input name="password"  type="text"  size="18" value="{{donnees.password|default("")}}" />
+                    <input name="password"  type="password"  size="18" value="{{donnees.password|default("")}}" />
                     {% if erreurs.password is defined %}
                         <small class="error">{{erreurs.password}}</small>
                     {% endif %}
@@ -128,6 +130,10 @@
         </div>
 
     </form>
+        <form action="{{ path("user.choice") }}">
+            <input type="submit" name="retour" value="retour" />
+
+        </form>
 
     <br/>
     </div>
