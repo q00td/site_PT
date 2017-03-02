@@ -114,7 +114,8 @@ class UserController implements ControllerProviderInterface {
             if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['login']))) $erreurs['login']='login composé de 2 lettres minimum';
             if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['nom_user']))) $erreurs['nom_user']='nom_user composé de 2 lettres minimum';
             if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['prenom_user']))) $erreurs['prenom_user']='prenom_user composé de 2 lettres minimum';
-            if(! is_numeric($donnees['N_INE']))$erreurs['N_INE']='veuillez saisir une valeur';
+           // if(! is_numeric($donnees['N_INE']))$erreurs['N_INE']='veuillez saisir une valeur';
+            if ((! preg_match("/(\d{10})([A-Za-z ]{1,})/",$donnees['N_INE']))) $erreurs['N_INE']='Entrer un INE valide';
             if ((! preg_match("/^[A-Za-z ]{2,}@edu.univ-fcomte.fr/",$donnees['e_mail']))) $erreurs['e_mail']='entrer une adresse universitaire';
             if ((! preg_match("/^[A-Za-z ]{2,}/",$donnees['password']))) $erreurs['password']='password composé de 2 lettres minimum';
             if ((! preg_match("/(\d{4})-(\d{2})-(\d{2})/",$donnees['date_naissance']))) $erreurs['date_naissance']='entrer une date valide format aaaa-mm-jj';
