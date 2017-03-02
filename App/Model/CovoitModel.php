@@ -13,7 +13,7 @@ class CovoitModel {
         $queryBuilder = new QueryBuilder($this->db);
         $queryBuilder
             ->select('*')
-            ->from('Covoiturage', 'c');
+            ->from('Covoiturage', 'c') ;
         return $queryBuilder->execute()->fetchAll();
     }
     public function insertCovoit($donnees) {
