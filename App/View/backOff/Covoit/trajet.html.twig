@@ -31,7 +31,7 @@
     </style>
 </head>
 <body>
-
+{{ depart }}{{ arrive }}
 <div id="floating-panel">
     <b>Start: </b>
     <select id="start" onchange="calcRoute();">
@@ -40,10 +40,14 @@
 
 
 
+
+
     </select>
     <b>End: </b>
     <select id="end" onchange="calcRoute();">
         <option value="{{ arrive }}">{{ arrive }}</option>
+
+
 
 
     </select>

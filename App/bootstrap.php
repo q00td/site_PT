@@ -3,6 +3,10 @@ include('config.php');
 
 //On initialise le timeZone
 ini_set('date.timezone', 'Europe/Paris');
+//require 'PHPMailer/PHPMailerAutoload.php';
+require join(DIRECTORY_SEPARATOR,[dirname(__DIR__), 'App','PHPMailer', 'PHPMailerAutoload.php']);
+require join(DIRECTORY_SEPARATOR,[dirname(__DIR__), 'App','PHPMailer', 'essai.php']);
+
 
 //On ajoute l'autoloader (compatible winwin)
 $loader = require_once join(DIRECTORY_SEPARATOR,[dirname(__DIR__), 'vendor', 'autoload.php']);
@@ -34,6 +38,9 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 
 //en dev, nous voulons voir les erreurs
 $app['debug'] = true;
+
+
+
 
 // rajoute la méthode asset dans twig
 $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {

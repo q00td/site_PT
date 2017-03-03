@@ -1,6 +1,7 @@
 {% extends "layout.html.twig" %}
 {% block contenu %}
     <body id="bg">
+
     <!-- start: Content -->
 
     <div class="row-fluid">
@@ -56,7 +57,7 @@
                      Date :{{ covoit.date_covoiturage }}
                 </div>
                 <div class="col-md-1">
-<form method="post" action="{{ path('Covoit.plan') }}">
+<form action="{{ path('Covoit.plan') }}" method="post" target="_blank" onclick="map()">
     <input type="hidden" name="depart" value="{{ covoit.depart }}">
     <input type="hidden" name="arrive" value="{{ covoit.arrive }}">
 

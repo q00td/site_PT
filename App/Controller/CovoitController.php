@@ -5,6 +5,7 @@ use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;   // pour utiliser request
 use App\Model\CovoitModel;
+use App\Controller\PHPMailer;
 use Symfony\Component\Validator\Constraints as Assert;   // pour utiliser la validation
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -77,35 +78,42 @@ class CovoitController implements ControllerProviderInterface
     public function mail(Application $app,$id) {
 
 
-        $this->CovoitModel = new CovoitModel($app);
-        $mail= $this->CovoitModel->getMail($id);
-        $mailFROM=$app ["session"]->get("e_mail");
-        var_dump($mail["e_mail"]);
-        var_dump($mailFROM);
-        $b=mail($mailFROM, 'Mon Sujet', 'Ceci est un test');
-        var_dump($b);
+        $mail = new \PHPMailer;
 
-        $destinataire = 'quentinoternaud@gmail.com';
-// Pour les champs $expediteur / $copie / $destinataire, séparer par une virgule s'il y a plusieurs adresses
-        $expediteur = 'quentinoternaud@gmail.com';
-        $copie = 'quentinoternaud@gmail.com';
-        $copie_cachee = 'quentinoternaud@gmail.com';
-        $objet = 'Test'; // Objet du message
-        $headers  = 'MIME-Version: 1.0' . "\n"; // Version MIME
-        $headers .= 'Reply-To: '.$expediteur."\n"; // Mail de reponse
-        $headers .= 'From: "Nom_de_expediteur"<'.$expediteur.'>'."\n"; // Expediteur
-        $headers .= 'Delivered-to: '.$destinataire."\n"; // Destinataire
-        $headers .= 'Cc: '.$copie."\n"; // Copie Cc
-        $headers .= 'Bcc: '.$copie_cachee."\n\n"; // Copie cachée Bcc
-        $message = 'Un Bonjour de Developpez.com!';
-        if (mail($destinataire, $objet, $message, $headers)) // Envoi du message
-        {
-            echo 'Votre message a bien été envoyé ';
+        $From=$app["session"]->get("e_mail");
+        $this->CovoitModel = new CovoitModel($app);
+        $mailTO= $this->CovoitModel->getMail($id);
+
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';             // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                     // Enable SMTP authentication
+        $mail->Username = 'elyos999@gmail.com';          // SMTP username
+        $mail->Password = 'jinn999*'; // SMTP password
+        $mail->SMTPSecure = 'tls';                  // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 587;                          // TCP port to connect to
+
+        $mail->setFrom('elyos999@gmail.com', 'Elyos');
+        $mail->addReplyTo('elyos999@gmail.com', 'Elyos');
+        $mail->addAddress('quentinoternaud@gmail.com');   // Add a recipient
+//        $mail->addCC('cc@example.com');
+//        $mail->addBCC('bcc@example.com');
+
+        $mail->isHTML(true);  // Set email format to HTML
+
+      $bodyContent = '<h1>Votre trajet a été réservé par '.$From.' </h1>';
+        $bodyContent .= '<p>Test<b>Test</b></p>';
+
+        $mail->Subject = 'Trajet reservé: Quentin';
+        $mail->Body    = $bodyContent;
+
+        if(!$mail->send()) {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            echo 'Message has been sent';
         }
-        else // Non envoyé
-        {
-            echo "Votre message n'a pas pu être envoyé";
-        }
+
+
 
         $Covoit = $this->CovoitModel->getAllCovoit();
         return $app["twig"]->render('backOff/Covoit/Covoit.html.twig',['data'=>$Covoit]);
